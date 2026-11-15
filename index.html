@@ -45,16 +45,19 @@ button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:tran
 /* bottom nav */
 .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:2px;background:rgba(246,241,230,.97);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -4px 18px rgba(34,42,61,.08)}
 .bn-item{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;background:none;border:none;padding:5px 2px;border-radius:12px}
-.bn-item .stamp{width:30px;height:30px;font-size:12px}
+.bn-item .stamp{width:30px;height:30px;font-size:13px}
+.bn-item.wide{flex:1.6}
 .bn-item.active{background:var(--paper-deep)}
 .bn-label{font-size:11px;font-weight:700;line-height:1.3;white-space:nowrap}
 .bn-count{font-size:10px;color:var(--ink-soft);line-height:1.2;white-space:nowrap}
 .bn-more{width:30px;height:30px;display:grid;place-items:center;font-size:20px;font-weight:700;color:var(--ink-soft)}
 /* panel */
-.panel{display:none}
-.panel.active{display:block}
+.panel{display:block}
 .panel-head{display:flex;align-items:center;gap:12px;margin:2px 0 14px}
-.panel-head .stamp{width:46px;height:46px;font-size:16px}
+.stamp.lg{width:48px;height:48px;font-size:20px}
+.stamp.sm{width:24px;height:24px;font-size:11px}
+.ph-text{min-width:0}
+.panel-kicker{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.08em}
 .panel-title{font-family:'Shippori Mincho',serif;font-size:22px;font-weight:700;line-height:1.3}
 .panel-sub{font-size:12px;color:var(--ink-soft)}
 .tabs{display:flex;gap:4px;background:var(--paper-deep);padding:4px;border-radius:12px;margin-bottom:16px}
@@ -87,19 +90,35 @@ button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:tran
 .start-btn.primary small{color:rgba(246,241,230,.75)}
 .resume{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(184,146,60,.12);border:1px solid rgba(184,146,60,.5);border-radius:12px;padding:10px 14px;margin-bottom:14px;font-size:13px}
 .resume .btn{padding:6px 14px;flex:none}
-.ch-row{padding:8px 0;border-bottom:1px dashed var(--line)}
+.ch-card{padding:6px 14px}
+.ch-row{display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px dashed var(--line);padding:10px 0}
 .ch-row:last-child{border-bottom:none}
-.ch-top{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin-bottom:5px}
-.ch-num{color:var(--ink-soft);white-space:nowrap;flex:none}
+.ch-top{display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:6px}
+.ch-name{flex:1;min-width:0;font-weight:600}
+.ch-num{color:var(--ink-soft);white-space:nowrap;flex:none;font-size:12.5px}
+.ch-sub{display:block;font-size:11px;color:var(--ink-soft);margin-top:3px}
+.arrows{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;margin-top:16px}
+.arrows .btn{padding:10px 8px;font-size:13px}
+.side-sep{height:1px;background:var(--line);margin:6px 0 10px}
+.pick-list{display:flex;flex-direction:column}
+.pick-row{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 10px;margin-bottom:6px}
+.pick-row.active{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.pick-row .sm-label{font-size:13.5px}
+.rc-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.rc-row:last-child{border-bottom:none}
+.rc-name{flex:1;min-width:0}
+.rc-num{font-weight:700;color:var(--seal);white-space:nowrap}
+.rc-num.ng{color:var(--hanko)}
 /* items */
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600}
 .chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .search{width:100%;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 12px;font-size:16px;margin-bottom:10px}
-.ch-head{font-family:'Shippori Mincho',serif;font-weight:700;font-size:14px;margin:16px 2px 8px;color:var(--ink-soft)}
+.ch-head{display:flex;align-items:center;gap:8px;font-family:'Shippori Mincho',serif;font-weight:700;font-size:14px;margin:18px 2px 8px;color:var(--ink)}
 .item{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--unseen);border-radius:12px;padding:12px 12px 10px;margin-bottom:10px}
 .item.s-weak{border-left-color:var(--hanko)}.item.s-known{border-left-color:var(--seal)}
 .item-top{display:flex;gap:6px;align-items:center;font-size:11px;color:var(--ink-soft);margin-bottom:4px;flex-wrap:wrap}
+.rlist .tag{margin-right:2px}
 .tag{background:var(--paper-deep);border-radius:6px;padding:0 6px;font-size:11px}
 .tag.c{background:rgba(184,146,60,.18);color:#7d5f1f}
 .tag.warn{background:rgba(174,59,51,.1);color:var(--hanko)}
@@ -114,7 +133,10 @@ button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:tran
 /* quiz */
 .q-meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-soft);margin-bottom:6px;gap:8px}
 .q-card{min-height:150px;display:flex;flex-direction:column;justify-content:center;margin-top:12px}
-.q-ch{font-size:11px;color:var(--ink-soft);margin-bottom:8px}
+.q-card{border-top:5px solid var(--c)}
+.q-ch{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.q-chno{background:var(--c);color:#fff;border-radius:6px;padding:1px 9px;font-size:13px;font-weight:700;white-space:nowrap}
+.q-chtitle{font-size:13px;font-weight:700;color:var(--c)}
 .q-st{font-size:16.5px;line-height:1.85;white-space:pre-wrap}
 .ans-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .ans{height:78px;border:none;border-radius:16px;color:#fff;font-size:36px;font-family:'Shippori Mincho',serif;font-weight:700;box-shadow:0 3px 0 rgba(0,0,0,.15)}
@@ -195,19 +217,16 @@ textarea.inp{resize:vertical}
 <div class="toast hidden" id="toast"></div>
 <script>
 /* ===== 組み込みデータ =====
- 各項目は [ 項目文（＝○の問題）, ×の問題, 解説 ]。
+ 章ごとに、各項目は [ 項目文（＝○の問題）, ×の問題, 解説 ]。
  項目IDは「章コード-章内の番号」で決まるため、並び順を変えないこと。追加は各章の末尾に。 */
 const DATA = [
-{key:"hourei", label:"法令・制度", short:"法令", stamp:"法令", color:"#AE3B33",
- chapters:[{ch:"CH1",title:"証券市場の基礎知識"},{ch:"CH2",title:"金融商品取引法と関係法令"},{ch:"CH3",title:""}],
- facts:{
- CH1:[
+{ch:"CH1", title:"証券市場の基礎知識", color:"#8A6D3B", facts:[
   ["日本証券金融は、金融商品取引業者に対する金銭の貸付けと、金融商品取引業者の顧客に対する金銭の貸付けをどちらも業務として行っている。","日本証券金融が行う金銭の貸付けは金融商品取引業者に対するものに限られ、その顧客に対する貸付けは行わない。","日証金は貸借取引のほか、一般貸付として業者やその顧客（個人など）への貸付けも行う。"],
   ["日本証券金融は、内閣総理大臣の免許を受けた証券金融専門の株式会社である。","日本証券金融は、内閣総理大臣の登録を受けた証券金融専門の株式会社である。","証券金融会社は「登録」ではなく「免許」制。"],
   ["投資者保護基金の補償限度額は、対象顧客1人当たり1,000万円である。","投資者保護基金の補償限度額は、対象顧客1人当たり3,000万円である。","補償限度額は顧客1人当たり1,000万円。"],
   ["サステナビリティ・リンク・ボンドは、資金使途を限定せず、発行体が設定したKPIとその目標（SPT）の達成状況に応じて、利払いや償還などの条件が変わる債券である。","サステナビリティ・リンク・ボンドは、調達資金の使途を環境・社会に貢献する事業に限定した債券である。","資金使途を限定しないのが特徴。使途を限定するのはグリーンボンドなど。"]
- ],
- CH2:[
+]},
+{ch:"CH2", title:"金融商品取引法", color:"#AE3B33", facts:[
   ["信託の受益権、合同会社の社員権、集団投資スキーム持分などは、みなし有価証券（第二項有価証券）に分類される。","信託の受益権や集団投資スキーム持分は、第一項有価証券に分類される。","証券が発行されない権利は、みなし有価証券（第二項有価証券）として扱われる。"],
   ["有価証券の募集とは、第一項有価証券では50名以上を相手方として取得勧誘を行う場合、第二項有価証券では500名以上が所有することとなる場合をいう。","有価証券の募集とは、第一項有価証券では500名以上、第二項有価証券では50名以上を相手方とする場合をいう。","第一項有価証券は「50名以上」、第二項有価証券は「500名以上が所有」。"],
   ["有価証券の私募の取扱いは、銀行や保険会社などの登録金融機関も行うことができる。","有価証券の私募の取扱いは、第一種金融商品取引業者しか行うことができない。","登録金融機関も私募の取扱いを行える。"],
@@ -254,18 +273,15 @@ const DATA = [
   ["国債証券、地方債証券、金融債、政府保証債、流動性の低い一定の集団投資スキーム持分などは、企業内容等開示制度の適用除外とされている。","国債証券は、企業内容等開示制度の対象となる。","公共性の高い債券などは開示制度の適用除外。"],
   ["有価証券の募集又は売出しの届出は、その有価証券の発行者が行う。","有価証券の募集又は売出しの届出は、引受けを行う金融商品取引業者が行う。","届出義務者は発行者。"],
   ["有価証券の募集又は売出し等のために使用される、発行者の事業内容等を説明する文書を目論見書という。","有価証券の募集又は売出しのために投資家に交付する、発行者の事業内容等を説明する文書を、有価証券届出書という。","投資家に交付するのが目論見書。届出書は内閣総理大臣に提出する書類。"],
-  ["適格機関投資家に取得させる場合や、同一銘柄をすでに所有する者（同居者が交付を受けた場合を含む）が交付を受けないことに同意した場合は、目論見書の交付は不要である。","適格機関投資家に有価証券を取得させる場合でも、目論見書の交付は必ず必要である。","適格機関投資家や一定の同意がある場合は交付不要。"],
+  ["適格機関投資家に取得させる場合や、同一銘柄をすでに所有する者（同居者が交付を受けた場合を含む）が交付を受けないことに同意した場合は、目論見書の交付は不要である。","適格機関投資家に有価証券を取得させる場合でも、目論見書の交付は必ず必要である。","適格機関投資家や一定の同意がある場合は交付不要。"]
+]},
+{ch:"CH3", title:"金融商品の勧誘・販売に関係する法律", color:"#C0623B", facts:[
   ["消費者契約法による取消権は、追認できる時から1年間（霊感等による場合は3年間）行使しないとき、又は契約締結時から5年（霊感等による場合は10年）を経過したときに消滅する。","消費者契約法による取消権は、追認できる時から5年間行使しないときに消滅する。","原則「1年／5年」、霊感等は「3年／10年」。"],
   ["消費者契約法の「消費者」とは個人をいい、事業として又は事業のために契約の当事者となる個人は含まれない。","事業のために契約の当事者となる個人も、消費者契約法の「消費者」に含まれる。","事業のための契約当事者は消費者に該当しない。"],
   ["取引時確認を行ったときは、確認記録を直ちに作成し、取引終了日と取引時確認日のうち後に到来する日から7年間保存しなければならない。","取引時確認の記録は、取引終了日から5年間保存すればよい。","保存期間は7年間。"],
-  ["個人データの取扱いを、利用目的の達成に必要な範囲内で委託する場合、委託先は第三者に該当しないため、本人の同意は不要である。","個人データの取扱いを委託する場合でも、委託先は第三者にあたるため本人の同意が必要である。","委託は第三者提供にあたらない。"],
-  ["新たに販売する有価証券等について、適合する顧客が想定できないものは、顧客に十分な説明をしたとしても販売してはならない。","適合する顧客が想定できない有価証券でも、顧客に十分な説明を行えば販売することができる。","説明しても販売不可（合理的根拠適合性）。"]
- ]
-}},
-{key:"keizai", label:"経済・金融・財政", short:"経済", stamp:"経済", color:"#4A6A9C",
- chapters:[{ch:"CH4",title:"経済・金融・財政"}],
- facts:{
- CH4:[
+  ["個人データの取扱いを、利用目的の達成に必要な範囲内で委託する場合、委託先は第三者に該当しないため、本人の同意は不要である。","個人データの取扱いを委託する場合でも、委託先は第三者にあたるため本人の同意が必要である。","委託は第三者提供にあたらない。"]
+]},
+{ch:"CH4", title:"経済・金融・財政の常識", color:"#4A6A9C", facts:[
   ["景気動向指数は内閣府が毎月公表し、日銀短観（全国企業短期経済観測調査）は日本銀行が3か月に1回公表する。","日銀短観は、日本銀行が毎月公表している。","景気動向指数＝内閣府・毎月、短観＝日銀・四半期ごと。"],
   ["企業物価指数（CGPI）は、日本銀行が公表している。","企業物価指数（CGPI）は、総務省が公表している。","CGPIとSPPIは日銀、CPIは総務省。"],
   ["消費者物価指数（CPI）は総務省が公表しており、直接税や社会保険料などの非消費支出や、土地・住宅の価格は含まれない。","消費者物価指数（CPI）には、土地や住宅の価格が含まれる。","CPIは消費支出が対象。"],
@@ -285,18 +301,14 @@ const DATA = [
   ["有効求人倍率は、有効求人数を有効求職者数で割って求める。","有効求人倍率は、有効求職者数を有効求人数で割って求める。","求人数÷求職者数。"],
   ["マネーストック統計で、M1は現金通貨と預金通貨、M3はM1に準通貨とCD（譲渡性預金）を加えたものである。","M3は、M1に国債を加えたものである。","M3＝M1＋準通貨＋CD。"],
   ["M2の対象となる預金の預入先はゆうちょ銀行などを除く国内銀行等に限られ、M3の預入先にはゆうちょ銀行、農協、信用組合、労働金庫なども含まれる。","M2の預入先にはゆうちょ銀行が含まれるが、M3には含まれない。","ゆうちょ銀行などが入るのはM3（M2には入らない）。"]
- ]
-}},
-{key:"kisoku", label:"諸規則・セールス", short:"規則", stamp:"規則", color:"#3F6E5E",
- chapters:[{ch:"CH5",title:"セールス業務"},{ch:"CH6",title:"協会・取引所の規則"},{ch:"CH7",title:""}],
- facts:{
- CH5:[
+]},
+{ch:"CH5", title:"セールス業務", color:"#6C8A4E", facts:[
   ["事務ミスが発生したときは、まず内部管理責任者に報告し、その指示に従って顧客に対応する。事実の隠蔽や、担当者限りで顧客に追認を求めることは禁止されている。","事務ミスが発生したときは、まず担当者が顧客に事情を説明して追認を得てから、上司に報告する。","報告が先。担当者限りの処理は不可。"],
   ["外貨建債券を勧誘する際は、為替手数料などのコストにより利回りが目減りする可能性があることを説明しなければならない。","外貨建債券は利回りが高いため、為替手数料などのコストについて説明する必要はない。","コストによる目減りの説明が必要。"],
   ["IOSCO（証券監督者国際機構）の行為規範原則は、誠実・公正、注意義務、能力、顧客に関する情報、顧客に対する情報開示、利益相反、コンプライアンスの7項目である。","IOSCOの行為規範原則に「利益相反」は含まれない。","7原則に利益相反も含まれる。"],
   ["業者は、顧客の最大の利益及び市場の健全性を図るため、その業務に適用されるすべての規則を遵守しなければならない（IOSCOのコンプライアンス原則）。","業者は、顧客の最大の利益を図るためであれば、業務に適用される規則の一部を遵守しなくてもよい。","すべての規則を遵守する。"]
- ],
- CH6:[
+]},
+{ch:"CH6", title:"協会定款・諸規則", color:"#3F6E5E", facts:[
   ["協会員は、顧客（特定投資家を除く）について顧客カードを備え付け、氏名、住所、生年月日、職業のほか、投資目的、資産の状況、投資経験の有無、取引の種類などを記載しなければならない。","顧客カードには、顧客の主要取引先を記載しなければならない。","主要取引先は記載事項ではない。"],
   ["信用取引などの取引開始基準は、日本証券業協会ではなく、各協会員が定める。","信用取引などの取引開始基準は、日本証券業協会が一律に定めている。","基準を定めるのは各協会員。"],
   ["商品関連市場デリバティブ取引の取次ぎ等の契約を特定投資家以外の顧客と締結する際は注意喚起文書を交付しなければならないが、契約締結前1年以内に交付している場合などは改めて交付する必要はない。","商品関連市場デリバティブ取引の取次ぎ等の契約を締結する際は、その都度必ず注意喚起文書を交付しなければならない。","1年以内に交付済みなら不要。"],
@@ -331,6 +343,9 @@ const DATA = [
   ["従業員の上場会社等の特定有価証券等の売買について協会員が定める社内規則には、従業員の範囲と売買等の手続に関する事項を規定する。投資勧誘の方法に関する事項は含まれない。","従業員の特定有価証券等の売買に関する社内規則には、投資勧誘の方法に関する事項を規定しなければならない。","従業員の不正取引を防ぐ規則なので、勧誘方法は含まない。"],
   ["新規公開株の個人顧客への配分では、原則として、個人顧客への配分予定数量の10％以上を抽選により配分先を決めなければならない。","新規公開株の個人顧客への配分では、配分予定数量の50％以上を抽選で決めなければならない。","10％以上を抽選。"],
   ["すでに外国証券取引口座に関する約款を交付している場合、顧客（特定投資家を除く）から改めて交付の申出がなければ、約款を交付する必要はない。","外国証券の取引のたびに、外国証券取引口座に関する約款を交付しなければならない。","交付済みなら、申出がない限り不要。"],
+  ["新たに販売する有価証券等について、適合する顧客が想定できないものは、顧客に十分な説明をしたとしても販売してはならない。","適合する顧客が想定できない有価証券でも、顧客に十分な説明を行えば販売することができる。","説明しても販売不可（合理的根拠適合性）。"]
+]},
+{ch:"CH7", title:"取引所定款・諸規則", color:"#2E6F7E", facts:[
   ["大阪取引所の取引参加者は、扱う取引の種類ごとに区分されている（先物・オプション取引参加者、国債先物等取引参加者など）。","大阪取引所の取引参加者の資格は1種類で、扱う取引による区分はない。","取引の種類ごとに参加者資格が分かれる。"],
   ["大阪取引所の国債先物等取引参加者になれるのは、第一種金融商品取引業者のうち金融商品取引法第28条第1項第1号の業務の登録を受けた者などである。","大阪取引所の国債先物等取引参加者には、第二種金融商品取引業者もなることができる。","第一種業者などが対象。"],
   ["取引参加者は、事故防止などの観点から、顧客の調査を行うことが義務付けられている。","取引参加者による顧客の調査は任意とされている。","顧客の調査は義務。"],
@@ -345,12 +360,8 @@ const DATA = [
   ["非参加型優先株の上場審査や上場廃止については、普通株とは異なる基準が設けられている。","非参加型優先株の上場審査は、普通株と同じ基準で行われる。","特異性を考慮した別の基準。"],
   ["発行者からの申請なしで上場できるのは、国債証券だけである。","地方債証券は、発行者からの申請なしで上場できる。","申請不要は国債証券のみ。"],
   ["転換社債型新株予約権付社債券の上場審査基準には、発行者に対する基準と、上場申請銘柄に対する基準とがある。","転換社債型新株予約権付社債券の上場審査基準は、上場申請銘柄に対する基準のみである。","発行者と銘柄の両方に基準がある。"]
- ]
-}},
-{key:"gyomu", label:"株式業務・商品", short:"業務", stamp:"業務", color:"#7A5C99",
- chapters:[{ch:"CH8",title:"株式業務"},{ch:"CH9",title:""},{ch:"CH10",title:""},{ch:"CH11",title:""},{ch:"CH12",title:""}],
- facts:{
- CH8:[
+]},
+{ch:"CH8", title:"株式業務", color:"#7A5C99", facts:[
   ["東証の国債証券の売買の決済は、売買契約締結の日から起算して2日目の日（休業日を除く）に行われる。","東証の国債証券の売買の決済は、売買契約締結の日から起算して4日目の日に行われる。","国債は2日目。株券の普通取引は3日目。"],
   ["株券の普通取引では、配当金や権利の確定期日の前日（休業日を除く）から配当落・権利落として売買され、2日前（休業日を除く）までが権利付となる。","株券の普通取引では、権利確定期日の当日から権利落として売買される。","前日から権利落、2日前まで権利付。"],
   ["売呼値は値段の低いものが高いものに優先し、買呼値は値段の高いものが低いものに優先する（価格優先の原則）。","売呼値は、値段の高いものが低いものに優先する。","売りは安い方、買いは高い方が優先。"],
@@ -411,9 +422,25 @@ const DATA = [
   ["外国株式信用取引の最低保証金率は、約定代金の50％である。","外国株式信用取引の最低保証金率は、約定代金の30％である。","国内株式の30％と違い50％。"],
   ["株主有償割当による新株の発行日決済取引は、原則として権利落の期日から新株の新規記録日の2日前（休業日を除く）まで行われる。","株主有償割当による新株の発行日決済取引は、新株の新規記録日以降に行われる。","権利落の日から新規記録日の2日前まで。"],
   ["発行日決済取引の決済は、原則として新株券の新規記録日に一括して行われる。","発行日決済取引の決済は、約定日から起算して3日目に個別に行われる。","新規記録日に一括して決済。"]
- ]
-}}
+]},
+{ch:"CH9", title:"債券業務", color:"#5B5FA3", facts:[
+]},
+{ch:"CH10", title:"投資信託及び投資法人に関する業務", color:"#9C5A7C", facts:[
+]},
+{ch:"CH11", title:"付随業務", color:"#7D6B4F", facts:[
+]},
+{ch:"CH12", title:"株式会社法概論", color:"#8B4A4A", facts:[
+]},
+{ch:"CH13", title:"財務諸表と企業分析", color:"#4F7A6B", facts:[
+]},
+{ch:"CH14", title:"証券税制", color:"#A07A2E", facts:[
+]},
+{ch:"CH15", title:"デリバティブ取引", color:"#3E4C7A", facts:[
+]}
 ];
+
+/* 旧版（4科目構成）の項目IDから新しい章の項目IDへの対応表。進捗の引き継ぎに使う */
+const LEGACY_MAP = {"hourei:CH1-0":"ch1:CH1-0","hourei:CH1-1":"ch1:CH1-1","hourei:CH1-2":"ch1:CH1-2","hourei:CH1-3":"ch1:CH1-3","hourei:CH2-0":"ch2:CH2-0","hourei:CH2-1":"ch2:CH2-1","hourei:CH2-2":"ch2:CH2-2","hourei:CH2-3":"ch2:CH2-3","hourei:CH2-4":"ch2:CH2-4","hourei:CH2-5":"ch2:CH2-5","hourei:CH2-6":"ch2:CH2-6","hourei:CH2-7":"ch2:CH2-7","hourei:CH2-8":"ch2:CH2-8","hourei:CH2-9":"ch2:CH2-9","hourei:CH2-10":"ch2:CH2-10","hourei:CH2-11":"ch2:CH2-11","hourei:CH2-12":"ch2:CH2-12","hourei:CH2-13":"ch2:CH2-13","hourei:CH2-14":"ch2:CH2-14","hourei:CH2-15":"ch2:CH2-15","hourei:CH2-16":"ch2:CH2-16","hourei:CH2-17":"ch2:CH2-17","hourei:CH2-18":"ch2:CH2-18","hourei:CH2-19":"ch2:CH2-19","hourei:CH2-20":"ch2:CH2-20","hourei:CH2-21":"ch2:CH2-21","hourei:CH2-22":"ch2:CH2-22","hourei:CH2-23":"ch2:CH2-23","hourei:CH2-24":"ch2:CH2-24","hourei:CH2-25":"ch2:CH2-25","hourei:CH2-26":"ch2:CH2-26","hourei:CH2-27":"ch2:CH2-27","hourei:CH2-28":"ch2:CH2-28","hourei:CH2-29":"ch2:CH2-29","hourei:CH2-30":"ch2:CH2-30","hourei:CH2-31":"ch2:CH2-31","hourei:CH2-32":"ch2:CH2-32","hourei:CH2-33":"ch2:CH2-33","hourei:CH2-34":"ch2:CH2-34","hourei:CH2-35":"ch2:CH2-35","hourei:CH2-36":"ch2:CH2-36","hourei:CH2-37":"ch2:CH2-37","hourei:CH2-38":"ch2:CH2-38","hourei:CH2-39":"ch2:CH2-39","hourei:CH2-40":"ch2:CH2-40","hourei:CH2-41":"ch2:CH2-41","hourei:CH2-42":"ch2:CH2-42","hourei:CH2-43":"ch2:CH2-43","hourei:CH2-44":"ch2:CH2-44","hourei:CH2-45":"ch2:CH2-45","hourei:CH2-46":"ch2:CH2-46","hourei:CH2-47":"ch3:CH3-0","hourei:CH2-48":"ch3:CH3-1","hourei:CH2-49":"ch3:CH3-2","hourei:CH2-50":"ch3:CH3-3","keizai:CH4-0":"ch4:CH4-0","keizai:CH4-1":"ch4:CH4-1","keizai:CH4-2":"ch4:CH4-2","keizai:CH4-3":"ch4:CH4-3","keizai:CH4-4":"ch4:CH4-4","keizai:CH4-5":"ch4:CH4-5","keizai:CH4-6":"ch4:CH4-6","keizai:CH4-7":"ch4:CH4-7","keizai:CH4-8":"ch4:CH4-8","keizai:CH4-9":"ch4:CH4-9","keizai:CH4-10":"ch4:CH4-10","keizai:CH4-11":"ch4:CH4-11","keizai:CH4-12":"ch4:CH4-12","keizai:CH4-13":"ch4:CH4-13","keizai:CH4-14":"ch4:CH4-14","keizai:CH4-15":"ch4:CH4-15","keizai:CH4-16":"ch4:CH4-16","keizai:CH4-17":"ch4:CH4-17","keizai:CH4-18":"ch4:CH4-18","kisoku:CH5-0":"ch5:CH5-0","kisoku:CH5-1":"ch5:CH5-1","kisoku:CH5-2":"ch5:CH5-2","kisoku:CH5-3":"ch5:CH5-3","kisoku:CH6-0":"ch6:CH6-0","kisoku:CH6-1":"ch6:CH6-1","kisoku:CH6-2":"ch6:CH6-2","kisoku:CH6-3":"ch6:CH6-3","kisoku:CH6-4":"ch6:CH6-4","kisoku:CH6-5":"ch6:CH6-5","kisoku:CH6-6":"ch6:CH6-6","kisoku:CH6-7":"ch6:CH6-7","kisoku:CH6-8":"ch6:CH6-8","kisoku:CH6-9":"ch6:CH6-9","kisoku:CH6-10":"ch6:CH6-10","kisoku:CH6-11":"ch6:CH6-11","kisoku:CH6-12":"ch6:CH6-12","kisoku:CH6-13":"ch6:CH6-13","kisoku:CH6-14":"ch6:CH6-14","kisoku:CH6-15":"ch6:CH6-15","kisoku:CH6-16":"ch6:CH6-16","kisoku:CH6-17":"ch6:CH6-17","kisoku:CH6-18":"ch6:CH6-18","kisoku:CH6-19":"ch6:CH6-19","kisoku:CH6-20":"ch6:CH6-20","kisoku:CH6-21":"ch6:CH6-21","kisoku:CH6-22":"ch6:CH6-22","kisoku:CH6-23":"ch6:CH6-23","kisoku:CH6-24":"ch6:CH6-24","kisoku:CH6-25":"ch6:CH6-25","kisoku:CH6-26":"ch6:CH6-26","kisoku:CH6-27":"ch6:CH6-27","kisoku:CH6-28":"ch6:CH6-28","kisoku:CH6-29":"ch6:CH6-29","kisoku:CH6-30":"ch6:CH6-30","kisoku:CH6-31":"ch6:CH6-31","kisoku:CH6-32":"ch6:CH6-32","kisoku:CH6-33":"ch6:CH6-33","hourei:CH2-51":"ch6:CH6-34","kisoku:CH6-34":"ch7:CH7-0","kisoku:CH6-35":"ch7:CH7-1","kisoku:CH6-36":"ch7:CH7-2","kisoku:CH6-37":"ch7:CH7-3","kisoku:CH6-38":"ch7:CH7-4","kisoku:CH6-39":"ch7:CH7-5","kisoku:CH6-40":"ch7:CH7-6","kisoku:CH6-41":"ch7:CH7-7","kisoku:CH6-42":"ch7:CH7-8","kisoku:CH6-43":"ch7:CH7-9","kisoku:CH6-44":"ch7:CH7-10","kisoku:CH6-45":"ch7:CH7-11","kisoku:CH6-46":"ch7:CH7-12","kisoku:CH6-47":"ch7:CH7-13","gyomu:CH8-0":"ch8:CH8-0","gyomu:CH8-1":"ch8:CH8-1","gyomu:CH8-2":"ch8:CH8-2","gyomu:CH8-3":"ch8:CH8-3","gyomu:CH8-4":"ch8:CH8-4","gyomu:CH8-5":"ch8:CH8-5","gyomu:CH8-6":"ch8:CH8-6","gyomu:CH8-7":"ch8:CH8-7","gyomu:CH8-8":"ch8:CH8-8","gyomu:CH8-9":"ch8:CH8-9","gyomu:CH8-10":"ch8:CH8-10","gyomu:CH8-11":"ch8:CH8-11","gyomu:CH8-12":"ch8:CH8-12","gyomu:CH8-13":"ch8:CH8-13","gyomu:CH8-14":"ch8:CH8-14","gyomu:CH8-15":"ch8:CH8-15","gyomu:CH8-16":"ch8:CH8-16","gyomu:CH8-17":"ch8:CH8-17","gyomu:CH8-18":"ch8:CH8-18","gyomu:CH8-19":"ch8:CH8-19","gyomu:CH8-20":"ch8:CH8-20","gyomu:CH8-21":"ch8:CH8-21","gyomu:CH8-22":"ch8:CH8-22","gyomu:CH8-23":"ch8:CH8-23","gyomu:CH8-24":"ch8:CH8-24","gyomu:CH8-25":"ch8:CH8-25","gyomu:CH8-26":"ch8:CH8-26","gyomu:CH8-27":"ch8:CH8-27","gyomu:CH8-28":"ch8:CH8-28","gyomu:CH8-29":"ch8:CH8-29","gyomu:CH8-30":"ch8:CH8-30","gyomu:CH8-31":"ch8:CH8-31","gyomu:CH8-32":"ch8:CH8-32","gyomu:CH8-33":"ch8:CH8-33","gyomu:CH8-34":"ch8:CH8-34","gyomu:CH8-35":"ch8:CH8-35","gyomu:CH8-36":"ch8:CH8-36","gyomu:CH8-37":"ch8:CH8-37","gyomu:CH8-38":"ch8:CH8-38","gyomu:CH8-39":"ch8:CH8-39","gyomu:CH8-40":"ch8:CH8-40","gyomu:CH8-41":"ch8:CH8-41","gyomu:CH8-42":"ch8:CH8-42","gyomu:CH8-43":"ch8:CH8-43","gyomu:CH8-44":"ch8:CH8-44","gyomu:CH8-45":"ch8:CH8-45","gyomu:CH8-46":"ch8:CH8-46","gyomu:CH8-47":"ch8:CH8-47","gyomu:CH8-48":"ch8:CH8-48","gyomu:CH8-49":"ch8:CH8-49","gyomu:CH8-50":"ch8:CH8-50","gyomu:CH8-51":"ch8:CH8-51","gyomu:CH8-52":"ch8:CH8-52","gyomu:CH8-53":"ch8:CH8-53","gyomu:CH8-54":"ch8:CH8-54","gyomu:CH8-55":"ch8:CH8-55","gyomu:CH8-56":"ch8:CH8-56","gyomu:CH8-57":"ch8:CH8-57","gyomu:CH8-58":"ch8:CH8-58","gyomu:CH8-59":"ch8:CH8-59"};
 
 </script>
 <script>
@@ -423,10 +450,12 @@ const PFX = 'gaimuin_';
 const KEYS = {status:PFX+'status_map', wrong:PFX+'wrong_pool', custom:PFX+'custom_store', streak:PFX+'streak_map', mode:PFX+'display_mode', backup:PFX+'last_backup'};
 const SYNC_TYPE = 'gaimuin_quiz_full_sync';
 const PACK_TYPE = 'gaimuin_question_pack';
+const SYNC_VERSION = 2;
 const MAX_Q = 20;
 const BIG_TEXT = 50000;
 const STATUS_LABEL = {weak:'苦手', known:'分かった', unseen:'未学習'};
 const MODE_LABEL = {all:'全項目', weak:'苦手', unseen:'未学習', review:'復習'};
+const ALL = 'all';
 
 /* ===== 小道具 ===== */
 const $ = s => document.querySelector(s);
@@ -438,34 +467,37 @@ function shuffle(a){ a = a.slice(); for(let i = a.length - 1; i > 0; i--){ const
 function toHalf(s){ return String(s).replace(/[０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)); }
 function toTop(){ window.scrollTo(0, 0); }
 
-/* ===== 組み込みデータの展開 ===== */
-const MODULES = {}, MODULE_KEYS = [], CH_MODULE = {}, CH_INFO = {};
-DATA.forEach(d => {
-  const rawFacts = [], bank = {};
-  d.chapters.forEach(c => {
-    CH_MODULE[c.ch] = d.key; CH_INFO[c.ch] = c;
-    (d.facts[c.ch] || []).forEach((f, i) => {
-      const id = c.ch + '-' + i;
-      rawFacts.push({id, ch:c.ch, text:f[0]});
-      bank[id] = [
-        {factId:id, ch:c.ch, statement:f[0], isTrue:true,  explanation:f[2]},
-        {factId:id, ch:c.ch, statement:f[1], isTrue:false, explanation:f[2]}
-      ];
-    });
+/* ===== 組み込みデータの展開（1章＝1モジュール） ===== */
+const MODULES = {}, MODULE_KEYS = [];
+DATA.forEach((d, idx) => {
+  const num = idx + 1, key = 'ch' + num, rawFacts = [], bank = {};
+  d.facts.forEach((f, i) => {
+    const id = d.ch + '-' + i;
+    rawFacts.push({id, text:f[0]});
+    bank[id] = [
+      {statement:f[0], isTrue:true,  explanation:f[2]},
+      {statement:f[1], isTrue:false, explanation:f[2]}
+    ];
   });
-  MODULES[d.key] = {key:d.key, label:d.label, short:d.short, stamp:d.stamp, color:d.color, chapters:d.chapters, rawFacts, bank};
-  MODULE_KEYS.push(d.key);
+  MODULES[key] = {key, ch:d.ch, num, title:d.title, color:d.color, rawFacts, bank};
+  MODULE_KEYS.push(key);
 });
+const scopeMods = s => s === ALL ? MODULE_KEYS : [s];
+const chName = m => `第${MODULES[m].num}章`;
+const chFull = m => `第${MODULES[m].num}章 ${MODULES[m].title}`;
+const stampHTML = (m, cls) => m === ALL
+  ? `<span class="stamp ${cls || ''}" style="--c:var(--ink)">全</span>`
+  : `<span class="stamp ${cls || ''}" style="--c:${MODULES[m].color}">${MODULES[m].num}</span>`;
+function chKeyFromNum(n){ n = +n; return n >= 1 && n <= MODULE_KEYS.length ? 'ch' + n : null; }
+function modFromCh(v, fb){
+  if(v == null || v === '') return fb;
+  const r = toHalf(String(v)).match(/(\d+)/);
+  return (r && chKeyFromNum(r[1])) || fb;
+}
 
 /* ===== 保存 ===== */
 function load(k, def){ try{ const v = localStorage.getItem(k); if(v == null) return def; const p = JSON.parse(v); return p == null ? def : p; }catch(e){ return def; } }
 let statusMap, wrongPool, customStore, streakMap;
-function loadAll(){
-  statusMap = load(KEYS.status, {}); if(!isObj(statusMap)) statusMap = {};
-  wrongPool = load(KEYS.wrong, []); if(!Array.isArray(wrongPool)) wrongPool = [];
-  customStore = load(KEYS.custom, {}); if(!isObj(customStore)) customStore = {};
-  streakMap = load(KEYS.streak, {}); if(!isObj(streakMap)) streakMap = {};
-}
 function save(){
   try{
     localStorage.setItem(KEYS.status, JSON.stringify(statusMap));
@@ -473,6 +505,52 @@ function save(){
     localStorage.setItem(KEYS.custom, JSON.stringify(customStore));
     localStorage.setItem(KEYS.streak, JSON.stringify(streakMap));
   }catch(e){ alert('保存できませんでした。ブラウザの保存容量が不足している可能性があります。'); }
+}
+
+/* ===== 旧版（4科目構成）のデータを章構成に移す ===== */
+const LEGACY_DEFAULT = {hourei:'ch2', keizai:'ch4', kisoku:'ch6', gyomu:'ch8'};
+function isLegacyKey(k){ const m = String(k).split(':')[0]; return Object.prototype.hasOwnProperty.call(LEGACY_DEFAULT, m); }
+function migrate(d){
+  const st = isObj(d.statusMap) ? d.statusMap : {}, sm = isObj(d.streakMap) ? d.streakMap : {};
+  const wp = Array.isArray(d.wrongPool) ? d.wrongPool : [], cs0 = isObj(d.customStore) ? d.customStore : {};
+  const legacy = Object.keys(cs0).some(k => LEGACY_DEFAULT[k]) || Object.keys(st).some(isLegacyKey) || wp.some(w => w && LEGACY_DEFAULT[w.moduleKey]);
+  if(!legacy) return {statusMap:st, streakMap:sm, wrongPool:wp, customStore:cs0, migrated:false};
+  const keyMap = Object.assign({}, LEGACY_MAP);          // 旧 "科目:ID" → 新 "章:ID"
+  const ncs = {};
+  const bucket = m => (ncs[m] = ncs[m] || {edits:{}, addedFacts:[], addedQuestions:[]});
+  Object.keys(cs0).forEach(k => { if(!LEGACY_DEFAULT[k] && isObj(cs0[k])) ncs[k] = cs0[k]; });
+  Object.keys(LEGACY_DEFAULT).forEach(om => {
+    const c = cs0[om]; if(!isObj(c)) return;
+    (Array.isArray(c.addedFacts) ? c.addedFacts : []).forEach(f => {
+      const nm = modFromCh(f.ch, LEGACY_DEFAULT[om]);
+      bucket(nm).addedFacts.push({id:f.id, ch:MODULES[nm].ch, text:f.text});
+      keyMap[om + ':' + f.id] = nm + ':' + f.id;
+    });
+    if(isObj(c.edits)) Object.keys(c.edits).forEach(id => {
+      const nk = keyMap[om + ':' + id]; if(!nk) return;
+      const [nm, nid] = nk.split(':'); bucket(nm).edits[nid] = c.edits[id];
+    });
+    (Array.isArray(c.addedQuestions) ? c.addedQuestions : []).forEach(q => {
+      const nk = keyMap[om + ':' + q.factId]; if(!nk) return;
+      const [nm, nid] = nk.split(':');
+      bucket(nm).addedQuestions.push({factId:nid, ch:MODULES[nm].ch, statement:q.statement, isTrue:q.isTrue, explanation:q.explanation});
+    });
+  });
+  const remap = obj => { const o = {}; Object.keys(obj).forEach(k => { if(!isLegacyKey(k)){ o[k] = obj[k]; return; } const nk = keyMap[k]; if(nk) o[nk] = obj[k]; }); return o; };
+  const nwp = [];
+  wp.forEach(w => {
+    if(!w) return;
+    if(!LEGACY_DEFAULT[w.moduleKey]){ nwp.push(w); return; }
+    const nk = keyMap[w.moduleKey + ':' + w.factId]; if(!nk) return;
+    const [nm, nid] = nk.split(':');
+    nwp.push(Object.assign({}, w, {moduleKey:nm, factId:nid, ch:MODULES[nm].ch}));
+  });
+  return {statusMap:remap(st), streakMap:remap(sm), wrongPool:nwp, customStore:ncs, migrated:true};
+}
+function loadAll(){
+  const r = migrate({statusMap:load(KEYS.status, {}), wrongPool:load(KEYS.wrong, []), customStore:load(KEYS.custom, {}), streakMap:load(KEYS.streak, {})});
+  statusMap = r.statusMap; wrongPool = r.wrongPool; customStore = r.customStore; streakMap = r.streakMap;
+  if(r.migrated){ save(); setTimeout(() => toast('これまでの進捗を章ごとの構成に引き継ぎました'), 600); }
 }
 loadAll();
 
@@ -489,16 +567,17 @@ function getFacts(m){
   const c = cs(m);
   const out = MODULES[m].rawFacts.map(f => {
     const edited = Object.prototype.hasOwnProperty.call(c.edits, f.id);
-    return {id:f.id, ch:f.ch, text: edited ? c.edits[f.id] : f.text, edited, custom:false};
+    return {m, id:f.id, text: edited ? c.edits[f.id] : f.text, edited, custom:false};
   });
-  c.addedFacts.forEach(f => out.push({id:f.id, ch:f.ch || 'CUSTOM', text:f.text, edited:false, custom:true}));
+  c.addedFacts.forEach(f => out.push({m, id:f.id, text:f.text, edited:false, custom:true}));
   return out;
 }
-function findFact(m, id){ return getFacts(m).find(f => f.id === id) || null; }
-function questionsFor(m, f){
-  const added = cs(m).addedQuestions.filter(q => q.factId === f.id);
+const scopeFacts = s => scopeMods(s).flatMap(getFacts);
+function findFact(m, id){ return MODULES[m] ? getFacts(m).find(f => f.id === id) || null : null; }
+function questionsFor(f){
+  const added = cs(f.m).addedQuestions.filter(q => q.factId === f.id);
   if(f.custom || f.edited) return added;
-  return (MODULES[m].bank[f.id] || []).concat(added);
+  return (MODULES[f.m].bank[f.id] || []).concat(added);
 }
 const sk = (m, id) => m + ':' + id;
 function st(m, id){ return statusMap[sk(m, id)] || 'unseen'; }
@@ -507,33 +586,13 @@ function setSt(m, id, s){
   if(s === 'unseen') delete statusMap[k]; else statusMap[k] = s;
   streakMap[k] = 0;
 }
-function counts(m){
-  const facts = getFacts(m); let known = 0, weak = 0;
-  facts.forEach(f => { const s = st(m, f.id); if(s === 'known') known++; else if(s === 'weak') weak++; });
+function tally(facts){
+  let known = 0, weak = 0;
+  facts.forEach(f => { const s = st(f.m, f.id); if(s === 'known') known++; else if(s === 'weak') weak++; });
   return {facts, total:facts.length, known, weak, unseen:facts.length - known - weak};
 }
-function poolCount(m){ return wrongPool.filter(w => w.moduleKey === m).length; }
-
-/* ===== 章 ===== */
-function chNum(ch){ const r = String(ch || '').match(/^CH(\d+)$/); return r ? +r[1] : null; }
-function chModule(ch, fb){ if(CH_MODULE[ch]) return CH_MODULE[ch]; const n = chNum(ch); if(n && n >= 8) return 'gyomu'; return fb; }
-function normCh(v){
-  if(v == null || v === '') return null;
-  const s = toHalf(String(v)).trim();
-  if(/^custom$/i.test(s)) return 'CUSTOM';
-  const r = s.match(/(\d+)/); return r ? 'CH' + (+r[1]) : null;
-}
-function chLabel(ch){
-  if(!ch || ch === 'CUSTOM') return '自作（章なし）';
-  const n = chNum(ch); const base = n ? `第${n}章` : ch;
-  const info = CH_INFO[ch]; return info && info.title ? `${base} ${info.title}` : base;
-}
-function chSort(a, b){ const x = chNum(a), y = chNum(b); return (x == null ? 9999 : x) - (y == null ? 9999 : y); }
-function chaptersOf(m, facts){
-  const list = MODULES[m].chapters.map(c => c.ch);
-  (facts || getFacts(m)).forEach(f => { if(!list.includes(f.ch)) list.push(f.ch); });
-  return list.sort(chSort);
-}
+const counts = s => tally(scopeFacts(s));
+function poolCount(s){ const ms = scopeMods(s); return wrongPool.filter(w => ms.includes(w.moduleKey)).length; }
 function newCustomId(){
   const ids = new Set(); MODULE_KEYS.forEach(k => cs(k).addedFacts.forEach(f => ids.add(f.id)));
   let t = Date.now(); while(ids.has('CUSTOM-' + t)) t++;
@@ -541,74 +600,90 @@ function newCustomId(){
 }
 
 /* ===== 画面状態 ===== */
-let curMod = MODULE_KEYS[0];
+let curScope = ALL;
 const ui = {};
-MODULE_KEYS.forEach(m => ui[m] = {view:'dash', quiz:null, result:null, filter:'all', search:''});
+const freshUI = () => ({view:'dash', quiz:null, result:null, filter:'all', search:''});
+[ALL].concat(MODULE_KEYS).forEach(s => ui[s] = freshUI());
+let lastAddCh = 'ch1';
 
 /* ===== ナビ（パネルの有無に関係なく常に更新） ===== */
-function refreshAllModuleCounts(){
-  const rows = MODULE_KEYS.map(m => ({m, M:MODULES[m], c:counts(m)}));
-  $('#sideMods').innerHTML = rows.map(({m, M, c}) => `
-    <button class="side-mod${m === curMod ? ' active' : ''}" data-act="mod" data-m="${m}">
-      <span class="stamp" style="--c:${M.color}">${esc(M.stamp)}</span>
-      <span class="sm-body"><span class="sm-label">${esc(M.label)}</span>
-        <span class="sm-count">分かった ${c.known} / ${c.total}・苦手 ${c.weak}</span>
+function navRow(s, cls){
+  const c = counts(s);
+  const label = s === ALL ? '全章まとめ' : chFull(s);
+  return `<button class="${cls}${s === curScope ? ' active' : ''}" data-act="scope" data-s="${s}">
+      ${stampHTML(s)}
+      <span class="sm-body"><span class="sm-label">${esc(label)}</span>
+        <span class="sm-count">${c.total ? `分かった ${c.known} / ${c.total}・苦手 ${c.weak}` : 'まだ項目がありません'}</span>
         <span class="bar"><i class="k" style="width:${pct(c.known, c.total)}%"></i><i class="w" style="width:${pct(c.weak, c.total)}%"></i></span>
-      </span>
-    </button>`).join('');
-  $('#bnMods').innerHTML = rows.map(({m, M, c}) => `
-    <button class="bn-item${m === curMod ? ' active' : ''}" data-act="mod" data-m="${m}">
-      <span class="stamp" style="--c:${M.color}">${esc(M.stamp)}</span>
-      <span class="bn-label">${esc(M.short)}</span><span class="bn-count">${c.known}/${c.total}</span>
-    </button>`).join('') +
-    `<button class="bn-item" data-act="menu"><span class="bn-more">⋯</span><span class="bn-label">メニュー</span><span class="bn-count">同期など</span></button>`;
+      </span></button>`;
+}
+function refreshAllModuleCounts(){
+  $('#sideMods').innerHTML = navRow(ALL, 'side-mod') + '<div class="side-sep"></div>' + MODULE_KEYS.map(m => navRow(m, 'side-mod')).join('');
+  const a = counts(ALL), cur = curScope === ALL ? null : curScope, cc = cur ? counts(cur) : null;
+  $('#bnMods').innerHTML = `
+    <button class="bn-item${curScope === ALL ? ' active' : ''}" data-act="scope" data-s="${ALL}">${stampHTML(ALL)}<span class="bn-label">全章</span><span class="bn-count">${a.known}/${a.total}</span></button>
+    <button class="bn-item wide${cur ? ' active' : ''}" data-act="picker">${cur ? stampHTML(cur) : '<span class="stamp" style="--c:var(--gold)">章</span>'}<span class="bn-label">${cur ? esc(chName(cur)) + ' ▾' : '章を選ぶ ▾'}</span><span class="bn-count">${cur ? `${cc.known}/${cc.total}` : '全15章'}</span></button>
+    <button class="bn-item" data-act="menu"><span class="bn-more">⋯</span><span class="bn-label">メニュー</span><span class="bn-count">同期など</span></button>`;
   $('#sideMenu').innerHTML = menuHTML();
 }
 function renderAll(){
   refreshAllModuleCounts();
-  MODULE_KEYS.forEach(renderPanel);
-  showActive();
+  renderPanel(curScope);
 }
-function showActive(){ document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + curMod)); }
-function switchMod(m){
-  if(!MODULES[m]) return;
-  curMod = m; showActive(); refreshAllModuleCounts(); renderPanel(m); toTop();
+function switchScope(s){
+  if(s !== ALL && !MODULES[s]) return;
+  curScope = s; refreshAllModuleCounts(); renderPanel(s); toTop();
+}
+function openPicker(){
+  openModal(`<div class="handle"></div><h3>章を選ぶ</h3>
+    <div class="pick-list">${navRow(ALL, 'pick-row')}${MODULE_KEYS.map(m => navRow(m, 'pick-row')).join('')}</div>
+    <button class="btn block mt" data-act="close">閉じる</button>`, true);
 }
 
-/* ===== 科目パネル ===== */
-function renderPanel(m){
-  const p = document.getElementById('panel-' + m); if(!p) return;
-  const M = MODULES[m], u = ui[m], c = counts(m);
+/* ===== パネル ===== */
+function renderPanel(s){
+  const p = $('#panel'); if(!p) return;
+  const u = ui[s], c = counts(s);
   const tabs = [['dash','ホーム'],['items','項目を見る'],['quiz','クイズ'],['result','結果']]
     .map(([v, l]) => `<button class="tab${u.view === v ? ' active' : ''}" data-act="tab" data-v="${v}">${l}</button>`).join('');
   let body;
-  if(u.view === 'items') body = itemsShellHTML(m);
-  else if(u.view === 'quiz') body = quizHTML(m);
-  else if(u.view === 'result') body = resultHTML(m);
-  else body = dashHTML(m, c);
-  p.innerHTML = `
-    <div class="panel-head"><span class="stamp" style="--c:${M.color}">${esc(M.stamp)}</span>
-      <div><div class="panel-title">${esc(M.label)}</div><div class="panel-sub">${c.total}項目・分かった ${c.known}・苦手 ${c.weak}</div></div></div>
+  if(u.view === 'items') body = itemsShellHTML(s);
+  else if(u.view === 'quiz') body = quizHTML(s);
+  else if(u.view === 'result') body = resultHTML(s);
+  else body = dashHTML(s, c);
+  const head = s === ALL
+    ? `<div class="panel-title">全章まとめ</div><div class="panel-sub">全15章から出題・${c.total}項目・分かった ${c.known}・苦手 ${c.weak}</div>`
+    : `<div class="panel-kicker">${esc(chName(s))}</div><div class="panel-title">${esc(MODULES[s].title)}</div><div class="panel-sub">${c.total}項目・分かった ${c.known}・苦手 ${c.weak}</div>`;
+  p.innerHTML = `<div class="panel-head">${stampHTML(s, 'lg')}<div class="ph-text">${head}</div></div>
     <div class="tabs">${tabs}</div><div class="view">${body}</div>`;
-  if(u.view === 'items') renderItemList(m);
+  if(u.view === 'items') renderItemList(s);
 }
-function emptyHTML(t, s){
-  return `<div class="card empty"><p><b>${t}</b></p><p class="muted">${s}</p><button class="btn mt" data-act="tab" data-v="dash">ホームへ</button></div>`;
+function emptyHTML(t, sub){
+  return `<div class="card empty"><p><b>${t}</b></p><p class="muted">${sub}</p><button class="btn mt" data-act="tab" data-v="dash">ホームへ</button></div>`;
+}
+function chapterTable(s){
+  return MODULE_KEYS.map(m => {
+    const c = counts(m);
+    return `<button class="ch-row" data-act="scope" data-s="${m}">
+      <span class="ch-top">${stampHTML(m, 'sm')}<span class="ch-name">${esc(chFull(m))}</span><span class="ch-num">${c.total ? Math.round(pct(c.known, c.total)) + '%' : '—'}</span></span>
+      <span class="bar"><i class="k" style="width:${pct(c.known, c.total)}%"></i><i class="w" style="width:${pct(c.weak, c.total)}%"></i></span>
+      <span class="ch-sub">${c.total ? `${c.known} / ${c.total}項目${c.weak ? `・苦手 ${c.weak}` : ''}` : '項目なし'}</span></button>`;
+  }).join('');
 }
 
-/* --- ホーム（ダッシュボード） --- */
-function dashHTML(m, c){
-  const pool = poolCount(m), u = ui[m];
+/* --- ホーム --- */
+function dashHTML(s, c){
+  const pool = poolCount(s), u = ui[s];
   const qn = x => Math.min(MAX_Q, x * 2);
   const btn = (mode, label, n, q, primary) =>
     `<button class="btn start-btn${primary ? ' primary' : ''}" data-act="start" data-mode="${mode}"${n ? '' : ' disabled'}>${label}<small>${n ? `対象 ${n}件・最大${q}問` : '対象なし'}</small></button>`;
-  const chs = chaptersOf(m, c.facts).map(ch => {
-    const fs = c.facts.filter(f => f.ch === ch); if(!fs.length) return '';
-    let k = 0, w = 0; fs.forEach(f => { const s = st(m, f.id); if(s === 'known') k++; else if(s === 'weak') w++; });
-    return `<div class="ch-row"><div class="ch-top"><span>${esc(chLabel(ch))}</span><span class="ch-num">${k} / ${fs.length}</span></div>
-      <div class="bar"><i class="k" style="width:${pct(k, fs.length)}%"></i><i class="w" style="width:${pct(w, fs.length)}%"></i></div></div>`;
-  }).join('');
   const resume = u.quiz ? `<div class="resume"><span>クイズの途中です（${u.quiz.idx + 1} / ${u.quiz.questions.length}問目）</span><button class="btn" data-act="tab" data-v="quiz">続きへ</button></div>` : '';
+  if(s !== ALL && !c.total){
+    return `<div class="card empty"><p><b>この章にはまだ項目がありません。</b></p>
+      <p class="muted">分からなかったことをメモしたら、ここに追加してください。</p>
+      <div class="add-row"><button class="btn" data-act="add-fact">＋ 項目を追加</button><button class="btn" data-act="bulk">📋 まとめて追加</button></div></div>
+      ${navArrows(s)}`;
+  }
   return `${resume}
     <div class="card">
       <div class="stats">
@@ -620,152 +695,169 @@ function dashHTML(m, c){
       <div class="bar big"><i class="k" style="width:${pct(c.known, c.total)}%"></i><i class="w" style="width:${pct(c.weak, c.total)}%"></i></div>
       <div class="legend"><span style="--lc:var(--seal)">分かった</span><span style="--lc:var(--hanko)">苦手</span><span style="--lc:var(--paper-deep)">未学習</span></div>
     </div>
-    <div class="sec-h">クイズを始める</div>
+    <div class="sec-h">${s === ALL ? '全章からクイズ' : esc(chName(s)) + 'のクイズ'}</div>
     <div class="start-grid">
       ${btn('all', '全項目から', c.total, qn(c.total), true)}
       ${btn('weak', '苦手から', c.weak, qn(c.weak))}
       ${btn('unseen', '未学習から', c.unseen, qn(c.unseen))}
       ${btn('review', '復習（間違えた問題）', pool, Math.min(MAX_Q, pool))}
     </div>
-    <div class="sec-h">章ごとの定着度</div>
-    <div class="card">${chs || '<p class="muted">項目がありません</p>'}</div>`;
+    ${s === ALL ? `<div class="sec-h">章ごとの定着度</div><div class="card ch-card">${chapterTable(s)}</div>` : navArrows(s)}`;
+}
+function navArrows(s){
+  const i = MODULE_KEYS.indexOf(s), prev = MODULE_KEYS[i - 1], next = MODULE_KEYS[i + 1];
+  return `<div class="arrows">
+    ${prev ? `<button class="btn" data-act="scope" data-s="${prev}">← ${esc(chName(prev))}</button>` : '<span></span>'}
+    <button class="btn" data-act="scope" data-s="${ALL}">全章</button>
+    ${next ? `<button class="btn" data-act="scope" data-s="${next}">${esc(chName(next))} →</button>` : '<span></span>'}</div>`;
 }
 
 /* --- 項目を見る --- */
-function itemsShellHTML(m){
-  return `<input class="search" type="search" placeholder="項目を検索" data-search="${m}" value="${esc(ui[m].search)}">
-    <div id="list-${m}"></div>
+function itemsShellHTML(s){
+  return `<input class="search" type="search" placeholder="項目を検索" data-search="${s}" value="${esc(ui[s].search)}">
+    <div id="item-list"></div>
     <div class="add-row"><button class="btn" data-act="add-fact">＋ 新しい項目を追加</button><button class="btn" data-act="bulk">📋 まとめて追加</button></div>`;
 }
-function renderItemList(m){
-  const box = document.getElementById('list-' + m); if(!box) return;
-  const u = ui[m], facts = getFacts(m);
+function renderItemList(s){
+  const box = $('#item-list'); if(!box) return;
+  const u = ui[s], facts = scopeFacts(s);
   const cnt = {all:facts.length, weak:0, known:0, unseen:0};
-  facts.forEach(f => cnt[st(m, f.id)]++);
+  facts.forEach(f => cnt[st(f.m, f.id)]++);
   const q = norm(u.search);
-  const shown = facts.filter(f => (u.filter === 'all' || st(m, f.id) === u.filter) && (!q || norm(f.text).includes(q)));
+  const shown = facts.filter(f => (u.filter === 'all' || st(f.m, f.id) === u.filter) && (!q || norm(f.text).includes(q)));
   const chips = [['all','すべて'],['weak','苦手'],['known','分かった'],['unseen','未学習']]
     .map(([f, l]) => `<button class="chip${u.filter === f ? ' active' : ''}" data-act="filter" data-f="${f}">${l} ${cnt[f]}</button>`).join('');
   let html = `<div class="chips">${chips}</div>`;
   if(!shown.length) html += `<p class="muted">該当する項目はありません。</p>`;
-  chaptersOf(m, facts).forEach(ch => {
-    const fs = shown.filter(f => f.ch === ch); if(!fs.length) return;
-    html += `<div class="ch-head">${esc(chLabel(ch))}（${fs.length}）</div>`;
+  scopeMods(s).forEach(m => {
+    const fs = shown.filter(f => f.m === m); if(!fs.length) return;
+    if(s === ALL) html += `<div class="ch-head">${stampHTML(m, 'sm')}${esc(chFull(m))}（${fs.length}）</div>`;
     fs.forEach(f => {
-      const s = st(m, f.id), qs = questionsFor(m, f);
+      const stt = st(m, f.id), qs = questionsFor(f);
       const noX = !qs.some(x => !x.isTrue);
-      html += `<div class="item s-${s}">
+      html += `<div class="item s-${stt}">
         <div class="item-top">${f.custom ? '<span class="tag c">自作</span>' : `<span>${esc(f.id)}</span>`}${f.edited ? '<span class="tag c">編集済</span>' : ''}<span class="tag">問題 ${qs.length}</span>${noX ? '<span class="tag warn">×問題なし</span>' : ''}</div>
         <div class="item-text">${esc(f.text)}</div>
-        <div class="item-actions"><div class="seg">${['weak','known','unseen'].map(x => `<button class="${x}${s === x ? ' on' : ''}" data-act="setst" data-id="${esc(f.id)}" data-s="${x}">${STATUS_LABEL[x]}</button>`).join('')}</div>
-        <button class="edit-btn" data-act="edit" data-id="${esc(f.id)}">編集</button></div></div>`;
+        <div class="item-actions"><div class="seg">${['weak','known','unseen'].map(x => `<button class="${x}${stt === x ? ' on' : ''}" data-act="setst" data-m="${m}" data-id="${esc(f.id)}" data-st="${x}">${STATUS_LABEL[x]}</button>`).join('')}</div>
+        <button class="edit-btn" data-act="edit" data-m="${m}" data-id="${esc(f.id)}">編集</button></div></div>`;
     });
   });
   box.innerHTML = html;
 }
 
 /* --- クイズ --- */
-function generateQuiz(m, mode){
+function generateQuiz(s, mode){
+  const ms = scopeMods(s);
   if(mode === 'review'){
-    return shuffle(wrongPool.filter(w => w.moduleKey === m)).slice(0, MAX_Q)
-      .map(w => ({factId:w.factId, ch:w.ch, statement:w.statement, isTrue:!!w.isTrue, explanation:w.explanation || ''}));
+    return shuffle(wrongPool.filter(w => ms.includes(w.moduleKey))).slice(0, MAX_Q)
+      .map(w => ({m:w.moduleKey, factId:w.factId, statement:w.statement, isTrue:!!w.isTrue, explanation:w.explanation || ''}));
   }
-  const facts = getFacts(m).filter(f => mode === 'all' || st(m, f.id) === mode);
-  let qs = [];
-  facts.forEach(f => questionsFor(m, f).forEach(q => qs.push({factId:f.id, ch:f.ch, statement:q.statement, isTrue:!!q.isTrue, explanation:q.explanation || ''})));
+  const facts = scopeFacts(s).filter(f => mode === 'all' || st(f.m, f.id) === mode);
+  const qs = [];
+  facts.forEach(f => questionsFor(f).forEach(q => qs.push({m:f.m, factId:f.id, statement:q.statement, isTrue:!!q.isTrue, explanation:q.explanation || ''})));
   return shuffle(qs).slice(0, Math.min(MAX_Q, facts.length * 2));
 }
-function startQuiz(m, mode){
-  const u = ui[m];
+function startQuiz(s, mode){
+  const u = ui[s];
   if(u.quiz && u.quiz.answers.length && !confirm('途中のクイズがあります。新しく始めると、途中までの回答は記録されません。よろしいですか？')) return;
-  const qs = generateQuiz(m, mode);
+  const qs = generateQuiz(s, mode);
   if(!qs.length){ alert('出題できる問題がありません。'); return; }
   u.quiz = {mode, questions:qs, idx:0, answers:[], answered:null};
-  u.view = 'quiz'; renderPanel(m); toTop();
+  u.view = 'quiz'; renderPanel(s); toTop();
 }
-function quizHTML(m){
-  const q = ui[m].quiz;
+function quizHTML(s){
+  const q = ui[s].quiz;
   if(!q) return emptyHTML('実施中のクイズはありません。', 'ホームの「クイズを始める」から開始してください。');
   const cur = q.questions[q.idx], n = q.questions.length, done = q.idx + (q.answered ? 1 : 0);
-  let h = `<div class="q-meta"><span>${MODE_LABEL[q.mode]}モード</span><span>${q.idx + 1} / ${n} 問</span></div>
+  const M = MODULES[cur.m];
+  let h = `<div class="q-meta"><span>${s === ALL ? '全章' : esc(chName(s))}・${MODE_LABEL[q.mode]}モード</span><span>${q.idx + 1} / ${n} 問</span></div>
     <div class="bar"><i class="p" style="width:${pct(done, n)}%"></i></div>
-    <div class="card q-card"><div class="q-ch">${esc(chLabel(cur.ch))}</div><div class="q-st">${esc(cur.statement)}</div></div>`;
+    <div class="card q-card" style="--c:${M.color}">
+      <div class="q-ch"><span class="q-chno">${esc(chName(cur.m))}</span><span class="q-chtitle">${esc(M.title)}</span></div>
+      <div class="q-st">${esc(cur.statement)}</div></div>`;
   if(!q.answered){
     h += `<div class="ans-grid"><button class="ans o" data-act="ans" data-v="o" aria-label="正しい">○</button><button class="ans x" data-act="ans" data-v="x" aria-label="誤り">×</button><button class="ans skip" data-act="ans" data-v="s">分からない</button></div>`;
   }else{
-    const a = q.answered, f = findFact(m, cur.factId);
+    const a = q.answered, f = findFact(cur.m, cur.factId);
     const cls = a.skip ? 'sk' : a.correct ? 'ok' : 'ng';
     const head = a.skip ? '分からない' : a.correct ? '正解！' : '不正解…';
     h += `<div class="fb ${cls}"><div class="fb-h">${head}</div>
       <div class="fb-ans">正しい答え：<b>${cur.isTrue ? '○（正しい）' : '×（誤り）'}</b></div>
       ${cur.explanation ? `<div class="fb-ex">${esc(cur.explanation)}</div>` : ''}
-      ${f && f.text !== cur.statement ? `<div class="fb-fact"><b>覚える内容</b>${esc(f.text)}</div>` : ''}</div>
+      ${f && f.text !== cur.statement ? `<div class="fb-fact"><b>覚える内容（${esc(chFull(cur.m))}）</b>${esc(f.text)}</div>` : ''}</div>
       <button class="btn primary block next" data-act="next">${q.idx >= n - 1 ? '結果を見る' : '次の問題へ'}</button>`;
   }
   return h + `<button class="quit" data-act="quit">ここで終了する</button>`;
 }
-function answer(m, v){
-  const q = ui[m].quiz; if(!q || q.answered) return;
+function answer(s, v){
+  const q = ui[s].quiz; if(!q || q.answered) return;
   const cur = q.questions[q.idx], skip = v === 's';
   const correct = !skip && ((v === 'o') === cur.isTrue);
   q.answered = {v, correct, skip};
   q.answers.push({q:cur, correct, skip});
-  renderPanel(m);
-  const card = document.querySelector(`#panel-${m} .q-card`);
+  renderPanel(s);
+  const card = document.querySelector('#panel .q-card');
   if(card){ const y = card.getBoundingClientRect().top + window.scrollY - 70; if(y < window.scrollY) window.scrollTo({top:Math.max(0, y), behavior:'smooth'}); }
 }
-function nextQ(m){
-  const q = ui[m].quiz; if(!q || !q.answered) return;
-  if(q.idx >= q.questions.length - 1){ finishQuiz(m); return; }
-  q.idx++; q.answered = null; renderPanel(m); toTop();
+function nextQ(s){
+  const q = ui[s].quiz; if(!q || !q.answered) return;
+  if(q.idx >= q.questions.length - 1){ finishQuiz(s); return; }
+  q.idx++; q.answered = null; renderPanel(s); toTop();
 }
-function quitQuiz(m){
-  const q = ui[m].quiz; if(!q) return;
+function quitQuiz(s){
+  const q = ui[s].quiz; if(!q) return;
   if(!q.answers.length){
     if(!confirm('クイズを中止しますか？')) return;
-    ui[m].quiz = null; ui[m].view = 'dash'; renderPanel(m); toTop(); return;
+    ui[s].quiz = null; ui[s].view = 'dash'; renderPanel(s); toTop(); return;
   }
-  if(confirm(`ここまでの ${q.answers.length}問 の回答で結果を出しますか？`)) finishQuiz(m);
+  if(confirm(`ここまでの ${q.answers.length}問 の回答で結果を出しますか？`)) finishQuiz(s);
 }
-function finishQuiz(m){
-  const q = ui[m].quiz; if(!q) return;
-  const promoted = [], added = [], wrong = []; let correct = 0;
+function finishQuiz(s){
+  const q = ui[s].quiz; if(!q) return;
+  const promoted = [], added = [], wrong = [], byCh = {}; let correct = 0;
   q.answers.forEach(a => {
-    const k = sk(m, a.q.factId);
+    const m = a.q.m, k = sk(m, a.q.factId);
+    byCh[m] = byCh[m] || {n:0, ok:0}; byCh[m].n++;
     if(a.correct){
-      correct++;
+      correct++; byCh[m].ok++;
       wrongPool = wrongPool.filter(w => !(w.moduleKey === m && w.statement === a.q.statement));
-      const s = (streakMap[k] || 0) + 1;
-      if(s >= 2 && statusMap[k] !== 'known'){
+      const n = (streakMap[k] || 0) + 1;
+      if(n >= 2 && statusMap[k] !== 'known'){
         statusMap[k] = 'known'; streakMap[k] = 0;
         const f = findFact(m, a.q.factId);
-        if(f && !promoted.some(p => p.id === f.id)) promoted.push(f);
-      }else streakMap[k] = s;
+        if(f && !promoted.some(p => p.m === m && p.id === f.id)) promoted.push(f);
+      }else streakMap[k] = n;
     }else{
       statusMap[k] = 'weak'; streakMap[k] = 0; wrong.push(a);
       if(!wrongPool.some(w => w.moduleKey === m && w.statement === a.q.statement)){
-        wrongPool.push({id:Date.now() + '-' + Math.random().toString(36).slice(2, 7), factId:a.q.factId, statement:a.q.statement, isTrue:a.q.isTrue, explanation:a.q.explanation, ch:a.q.ch, moduleKey:m, isSkip:a.skip});
+        wrongPool.push({id:Date.now() + '-' + Math.random().toString(36).slice(2, 7), factId:a.q.factId, statement:a.q.statement, isTrue:a.q.isTrue, explanation:a.q.explanation, ch:MODULES[m].ch, moduleKey:m, isSkip:a.skip});
         added.push(a.q);
       }
     }
   });
-  ui[m].result = {mode:q.mode, total:q.answers.length, correct, promoted, added, wrong};
-  ui[m].quiz = null; ui[m].view = 'result';
-  save(); refreshAllModuleCounts(); renderPanel(m); toTop();
+  ui[s].result = {mode:q.mode, total:q.answers.length, correct, promoted, added, wrong, byCh};
+  ui[s].quiz = null; ui[s].view = 'result';
+  save(); refreshAllModuleCounts(); renderPanel(s); toTop();
 }
 
 /* --- 結果 --- */
-function resultHTML(m){
-  const r = ui[m].result;
+function resultHTML(s){
+  const r = ui[s].result;
   if(!r) return emptyHTML('まだ結果はありません。', 'クイズを解くと、ここに結果が表示されます。');
-  const rate = r.total ? Math.round(r.correct / r.total * 100) : 0, pool = poolCount(m);
+  const rate = r.total ? Math.round(r.correct / r.total * 100) : 0, pool = poolCount(s);
+  const chs = MODULE_KEYS.filter(m => r.byCh[m]);
+  const chTable = chs.length > 1 ? `<div class="sec-h">章ごとの正答</div><div class="card">${chs.map(m => {
+      const b = r.byCh[m];
+      return `<div class="rc-row">${stampHTML(m, 'sm')}<span class="rc-name">${esc(chFull(m))}</span><span class="rc-num${b.ok < b.n ? ' ng' : ''}">${b.ok} / ${b.n}</span></div>`;
+    }).join('')}</div>` : '';
   const pro = r.promoted.length
-    ? `<ul class="rlist">${r.promoted.map(f => `<li>${esc(f.text)}</li>`).join('')}</ul>`
+    ? `<ul class="rlist">${r.promoted.map(f => `<li><span class="tag">${esc(chName(f.m))}</span> ${esc(f.text)}</li>`).join('')}</ul>`
     : '<p class="muted">今回はありません（同じ項目を2回続けて正解すると昇格します）</p>';
   const wr = r.wrong.length
-    ? `<ul class="rlist">${r.wrong.map(a => `<li><span class="mk ${a.q.isTrue ? 'o' : 'x'}">正解 ${a.q.isTrue ? '○' : '×'}</span>${a.skip ? '<span class="tag">分からない</span> ' : ''}${esc(a.q.statement)}</li>`).join('')}</ul>`
+    ? `<ul class="rlist">${r.wrong.map(a => `<li><span class="mk ${a.q.isTrue ? 'o' : 'x'}">正解 ${a.q.isTrue ? '○' : '×'}</span><span class="tag">${esc(chName(a.q.m))}</span>${a.skip ? ' <span class="tag">分からない</span>' : ''} ${esc(a.q.statement)}</li>`).join('')}</ul>`
     : '<p class="muted">全問正解です！</p>';
   return `<div class="card score"><div class="big">${r.correct} / ${r.total}</div><div class="rate">正答率 ${rate}%</div></div>
+    ${chTable}
     <div class="sec-h">「分かった」に昇格した項目（${r.promoted.length}）</div><div class="card">${pro}</div>
     <div class="sec-h">間違えた・分からなかった問題（${r.wrong.length}）</div>
     <div class="card">${wr}${r.added.length ? `<p class="note">うち ${r.added.length}問 を復習プールに追加しました。</p>` : ''}</div>
@@ -790,7 +882,7 @@ function closeModal(){
 let toastTimer = null;
 function toast(msg){
   const t = $('#toast'); t.textContent = msg; t.classList.remove('hidden');
-  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.add('hidden'), 2400);
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.add('hidden'), 2600);
 }
 function copyText(s, msg){
   if(navigator.clipboard && navigator.clipboard.writeText){
@@ -802,16 +894,10 @@ function showTextModal(text, title, note){
     <textarea class="inp" id="tx-area" rows="10" readonly>${esc(text)}</textarea>
     <div class="foot"><button class="btn" data-act="close">閉じる</button><button class="btn primary" data-act="copy-area">コピー</button></div>`, true);
 }
+const chOptions = sel => MODULE_KEYS.map(m => `<option value="${m}"${m === sel ? ' selected' : ''}>${esc(chFull(m))}</option>`).join('');
 
 /* ===== 項目の編集・追加 ===== */
 let editing = null;
-function chOptions(m, sel){
-  const list = MODULES[m].chapters.map(c => c.ch);
-  cs(m).addedFacts.forEach(f => { if(f.ch && f.ch !== 'CUSTOM' && !list.includes(f.ch)) list.push(f.ch); });
-  list.sort(chSort);
-  return list.map(ch => `<option value="${esc(ch)}"${ch === sel ? ' selected' : ''}>${esc(chLabel(ch))}</option>`).join('') +
-    `<option value="CUSTOM"${!sel || sel === 'CUSTOM' ? ' selected' : ''}>章なし（自作）</option>`;
-}
 function qRow(q){
   return `<div class="ed-q"><div class="ed-q-head"><span class="n">問題</span>
     <select class="inp ed-tf"><option value="1"${q.isTrue ? ' selected' : ''}>○ 正しい文</option><option value="0"${q.isTrue ? '' : ' selected'}>× 誤りの文</option></select>
@@ -821,13 +907,13 @@ function qRow(q){
 }
 function openEditor(m, id){
   const f = id ? findFact(m, id) : null; if(id && !f) return;
-  editing = {m, id};
-  const qs = f ? questionsFor(m, f) : [{statement:'', isTrue:true, explanation:''}, {statement:'', isTrue:false, explanation:''}];
+  const defM = f ? m : (curScope === ALL ? lastAddCh : curScope);
+  editing = {m:f ? m : null, id};
+  const qs = f ? questionsFor(f) : [{statement:'', isTrue:true, explanation:''}, {statement:'', isTrue:false, explanation:''}];
   const chPart = (!f || f.custom)
-    ? `<label class="fl">章</label><select class="inp" id="ed-ch">${chOptions(m, f ? f.ch : (ui[m].lastCh || 'CUSTOM'))}</select>`
-    : `<p class="note">${esc(chLabel(f.ch))}（${esc(f.id)}）</p>`;
-  openModal(`<h3>${f ? '項目を編集' : '新しい項目を追加'}</h3>
-    <p class="note">科目：${esc(MODULES[m].label)}</p>${chPart}
+    ? `<label class="fl">章</label><select class="inp" id="ed-ch">${chOptions(defM)}</select>`
+    : `<p class="note">${esc(chFull(m))}（${esc(f.id)}）</p>`;
+  openModal(`<h3>${f ? '項目を編集' : '新しい項目を追加'}</h3>${chPart}
     <label class="fl">項目（覚える内容）</label><textarea class="inp" id="ed-text" rows="4" placeholder="例：〜は〜である。">${esc(f ? f.text : '')}</textarea>
     <label class="fl">○×問題（×の問題は、数字・主体・期間・例外のどれか1か所だけ変えると効果的です）</label>
     <div id="ed-qs">${qs.map(qRow).join('')}</div>
@@ -836,9 +922,19 @@ function openEditor(m, id){
     <div class="foot">${f && f.custom ? '<button class="btn danger" data-act="ed-del">削除</button>' : ''}${f && f.edited ? '<button class="btn" data-act="ed-revert">元の内容に戻す</button>' : ''}
       <span class="spacer"></span><button class="btn" data-act="close">キャンセル</button><button class="btn primary" data-act="ed-save">保存</button></div>`, false);
 }
+function moveCustomFact(from, to, id){
+  const a = cs(from), b = cs(to);
+  const f = a.addedFacts.find(x => x.id === id); if(!f) return;
+  a.addedFacts = a.addedFacts.filter(x => x.id !== id); f.ch = MODULES[to].ch; b.addedFacts.push(f);
+  const ok = sk(from, id), nk = sk(to, id);
+  if(ok in statusMap){ statusMap[nk] = statusMap[ok]; delete statusMap[ok]; }
+  if(ok in streakMap){ streakMap[nk] = streakMap[ok]; delete streakMap[ok]; }
+  wrongPool.forEach(w => { if(w.moduleKey === from && w.factId === id){ w.moduleKey = to; w.ch = MODULES[to].ch; } });
+  a.addedQuestions = a.addedQuestions.filter(q => q.factId !== id);
+}
 function saveEditor(){
   if(!editing) return;
-  const {m, id} = editing, c = cs(m);
+  const {id} = editing; let m = editing.m;
   const text = $('#ed-text').value.trim();
   if(!text){ alert('項目の文章を入力してください。'); return; }
   const qs = [...document.querySelectorAll('#ed-qs .ed-q')].map(r => ({
@@ -847,23 +943,24 @@ function saveEditor(){
     explanation:r.querySelector('.ed-ex').value.trim()
   })).filter(q => q.statement);
   if(!qs.length){ alert('問題を1問以上入力してください。'); return; }
-  const chEl = $('#ed-ch');
+  const chEl = $('#ed-ch'), target = chEl ? chEl.value : m;
   if(!id){
-    const nid = newCustomId(), ch = chEl ? chEl.value : 'CUSTOM';
-    ui[m].lastCh = ch;
-    c.addedFacts.push({id:nid, ch, text});
-    qs.forEach(q => c.addedQuestions.push({factId:nid, ch, statement:q.statement, isTrue:q.isTrue, explanation:q.explanation}));
-    toast('項目を追加しました');
+    const nid = newCustomId(), c = cs(target);
+    lastAddCh = target;
+    c.addedFacts.push({id:nid, ch:MODULES[target].ch, text});
+    qs.forEach(q => c.addedQuestions.push({factId:nid, ch:MODULES[target].ch, statement:q.statement, isTrue:q.isTrue, explanation:q.explanation}));
+    toast(`${chName(target)}に項目を追加しました`);
   }else{
     const f = findFact(m, id); if(!f) return;
-    let ch = f.ch;
-    if(f.custom){ const af = c.addedFacts.find(x => x.id === id); ch = chEl ? chEl.value : af.ch; af.ch = ch; af.text = text; }
+    if(f.custom && target !== m){ moveCustomFact(m, target, id); m = target; }
+    const c = cs(m);
+    if(f.custom) c.addedFacts.find(x => x.id === id).text = text;
     else c.edits[id] = text;
     c.addedQuestions = c.addedQuestions.filter(q => q.factId !== id);
-    qs.forEach(q => c.addedQuestions.push({factId:id, ch, statement:q.statement, isTrue:q.isTrue, explanation:q.explanation}));
+    qs.forEach(q => c.addedQuestions.push({factId:id, ch:MODULES[m].ch, statement:q.statement, isTrue:q.isTrue, explanation:q.explanation}));
     toast('保存しました');
   }
-  save(); closeModal(); refreshAllModuleCounts(); renderPanel(m);
+  save(); closeModal(); renderAll();
 }
 function deleteFact(){
   if(!editing) return; const {m, id} = editing, c = cs(m);
@@ -872,14 +969,14 @@ function deleteFact(){
   c.addedQuestions = c.addedQuestions.filter(q => q.factId !== id);
   delete statusMap[sk(m, id)]; delete streakMap[sk(m, id)];
   wrongPool = wrongPool.filter(w => !(w.moduleKey === m && w.factId === id));
-  save(); closeModal(); refreshAllModuleCounts(); renderPanel(m); toast('削除しました');
+  save(); closeModal(); renderAll(); toast('削除しました');
 }
 function revertFact(){
   if(!editing) return; const {m, id} = editing, c = cs(m);
   if(!confirm('この項目を組み込みの内容に戻します（自分で編集した文章と問題は消えます）。よろしいですか？')) return;
   delete c.edits[id];
   c.addedQuestions = c.addedQuestions.filter(q => q.factId !== id);
-  save(); closeModal(); refreshAllModuleCounts(); renderPanel(m); toast('元の内容に戻しました');
+  save(); closeModal(); renderAll(); toast('元の内容に戻しました');
 }
 
 /* ===== まとめて追加（メモ・問題パック） ===== */
@@ -893,12 +990,14 @@ const PACK_PROMPT = `次のメモを、証券外務員の○×クイズアプリ
   {"statement":"×になる文","isTrue":false,"explanation":"解説"}]}
 ]}
 
+【章（ch）】外務員必携の章立てに合わせて、内容から正しい章を選ぶ（メモの見出しと違っていても内容を優先）
+${MODULE_KEYS.map(m => `${MODULES[m].ch}：${chFull(m)}`).join('\n')}
+
 【ルール】
 - 1項目＝1つの知識。条件が複数あるときは項目を分ける
 - 各項目に○の問題と×の問題を最低1問ずつ
 - ×の問題は、数字・主体・期間・例外のどれか1か所だけを変える
 - 解説は1〜2文で、正しい内容の根拠を書く
-- 章は「第N章」なら "CHN"。章が分からなければ "CUSTOM"
 - メモの内容に誤りや不正確な点があれば、正しい内容に直す
 - 出力は .json ファイルにする
 
@@ -906,15 +1005,16 @@ const PACK_PROMPT = `次のメモを、証券外務員の○×クイズアプリ
 `;
 function openBulk(){
   bulkPending = null;
+  const def = curScope === ALL ? lastAddCh : curScope;
   openModal(`<h3>まとめて追加</h3>
-    <p class="note">メモ（「・」で始まる行）か問題パック（JSON）を、貼り付けるかファイルで読み込みます。「第N章」の見出しがあれば、その章と科目に自動で振り分けます。</p>
+    <p class="note">メモ（「・」で始まる行）か問題パック（JSON）を、貼り付けるかファイルで読み込みます。「第N章」の見出しがあれば、その章に振り分けます。</p>
     <label class="fl">見出しがない項目の追加先</label>
-    <select class="inp" id="bk-mod">${MODULE_KEYS.map(k => `<option value="${k}"${k === curMod ? ' selected' : ''}>${esc(MODULES[k].label)}</option>`).join('')}</select>
+    <select class="inp" id="bk-mod">${chOptions(def)}</select>
     <label class="fl">メモまたは問題パック</label>
-    <textarea class="inp" id="bk-text" rows="8" placeholder="第2章&#10;・〜〜である。&#10;・〜〜は〜〜できる。"></textarea>
+    <textarea class="inp" id="bk-text" rows="8" placeholder="第9章&#10;・〜〜である。&#10;・〜〜は〜〜できる。"></textarea>
     <label class="menu-btn mt">📂 ファイルを選ぶ（.txt / .json）<input type="file" class="vh" data-file="bulk" accept=".txt,.json,.md,text/plain,application/json"></label>
     <div id="bk-preview"></div>
-    <p class="note">メモから追加した項目には「○の問題」が1問だけ付きます。×の問題は各項目の「編集」で足すか、「Claude用の依頼文をコピー」でClaudeに問題パック（○×付き）を作ってもらって、ここで読み込んでください。</p>
+    <p class="note">メモから追加した項目には「○の問題」が1問だけ付きます。×の問題は各項目の「編集」で足すか、「Claude用の依頼文をコピー」でClaudeに問題パック（○×付き・章の振り分け付き）を作ってもらって、ここで読み込んでください。</p>
     <div class="foot"><button class="btn" data-act="bk-prompt">Claude用の依頼文をコピー</button><span class="spacer"></span>
       <button class="btn" data-act="close">閉じる</button><button class="btn primary" data-act="bk-parse">内容を確認</button></div>`, false);
 }
@@ -932,30 +1032,29 @@ function fromPack(obj, fb){
   return arr.map(it => {
     if(!it) return null;
     const text = String(it.text || it.fact || '').trim(); if(!text) return null;
-    const ch = normCh(it.ch || it.chapter);
-    const m = MODULES[it.module] ? it.module : (ch && ch !== 'CUSTOM' ? chModule(ch, fb) : fb);
+    const m = modFromCh(it.ch || it.chapter, fb);
     const qs = (Array.isArray(it.questions) ? it.questions : []).map(q => ({
       statement:String(q && (q.statement || q.q) || '').trim(),
       isTrue:toBool(q && ('isTrue' in q ? q.isTrue : q.answer)),
       explanation:String(q && (q.explanation || q.exp) || '').trim()
     })).filter(q => q.statement && q.isTrue !== null);
-    return {m, ch:ch || 'CUSTOM', text, questions:qs.length ? qs : null};
+    return {m, text, questions:qs.length ? qs : null};
   }).filter(Boolean);
 }
 function parseBulk(raw, fb){
-  const t = String(raw).replace(/^\uFEFF/, '').trim();
+  const t = String(raw).replace(/^﻿/, '').trim();
   if(/^(```|\{|\[)/.test(t)) return fromPack(parseJSONLoose(t), fb);
   const lines = t.replace(/。[ \t　]*・/g, '。\n・').split(/\r?\n/);
-  let ch = null, cur = null; const out = [];
+  let m = null, cur = null; const out = [];
   lines.forEach(rawLine => {
     const line = rawLine.trim(); if(!line){ cur = null; return; }
     const h = toHalf(line).match(/^第\s*(\d+)\s*章/);
-    if(h){ ch = 'CH' + (+h[1]); cur = null; return; }
+    if(h){ m = chKeyFromNum(h[1]); cur = null; return; }
     const b = line.match(/^[・･\-－−•\*＊。．]\s*/);
-    if(b){ const body = line.slice(b[0].length).trim(); if(!body){ cur = null; return; } cur = {ch, text:body}; out.push(cur); }
+    if(b){ const body = line.slice(b[0].length).trim(); if(!body){ cur = null; return; } cur = {m, text:body}; out.push(cur); }
     else if(cur) cur.text += '\n' + line;
   });
-  return out.map(it => ({m: it.ch ? chModule(it.ch, fb) : fb, ch: it.ch || 'CUSTOM', text: it.text, questions: null}));
+  return out.map(it => ({m: it.m || fb, text: it.text, questions: null}));
 }
 function bulkParse(){
   const raw = $('#bk-text').value, fb = $('#bk-mod').value, box = $('#bk-preview');
@@ -969,9 +1068,8 @@ function bulkParse(){
   if(!items.length){ box.innerHTML = '<div class="preview"><div class="warn">項目が見つかりませんでした。各項目を「・」で始めてください。</div></div>'; return; }
   const lines = MODULE_KEYS.map(k => {
     const its = ok.filter(it => it.m === k); if(!its.length) return '';
-    const chs = [...new Set(its.map(it => it.ch))].sort(chSort).map(chLabel).join('、');
     const withX = its.filter(it => it.questions && it.questions.some(q => !q.isTrue)).length;
-    return `<li>${esc(MODULES[k].label)}：${its.length}件（${esc(chs)}）${withX ? `／×問題付き ${withX}件` : ''}</li>`;
+    return `<li>${esc(chFull(k))}：${its.length}件${withX ? `（×問題付き ${withX}件）` : ''}</li>`;
   }).join('');
   box.innerHTML = `<div class="preview"><b>${ok.length}件を追加できます</b>${dup.length ? `（すでにある項目と同じ ${dup.length}件 は追加しません）` : ''}
     ${lines ? `<ul>${lines}</ul>` : ''}
@@ -981,17 +1079,17 @@ function bulkCommit(){
   if(!bulkPending || !bulkPending.length) return;
   let n = 0;
   bulkPending.forEach(it => {
-    const c = cs(it.m), id = newCustomId();
-    c.addedFacts.push({id, ch:it.ch, text:it.text});
+    const c = cs(it.m), id = newCustomId(), ch = MODULES[it.m].ch;
+    c.addedFacts.push({id, ch, text:it.text});
     (it.questions || [{statement:it.text, isTrue:true, explanation:'メモの内容どおり（○）。'}])
-      .forEach(q => c.addedQuestions.push({factId:id, ch:it.ch, statement:q.statement, isTrue:q.isTrue, explanation:q.explanation}));
+      .forEach(q => c.addedQuestions.push({factId:id, ch, statement:q.statement, isTrue:q.isTrue, explanation:q.explanation}));
     n++;
   });
   save(); closeModal(); renderAll(); toast(`${n}件の項目を追加しました`);
 }
 
 /* ===== 同期 ===== */
-function buildSync(){ return {__type:SYNC_TYPE, version:1, exportedAt:new Date().toISOString(), statusMap, wrongPool, customStore, streakMap}; }
+function buildSync(){ return {__type:SYNC_TYPE, version:SYNC_VERSION, exportedAt:new Date().toISOString(), statusMap, wrongPool, customStore, streakMap}; }
 function markBackup(){ try{ localStorage.setItem(KEYS.backup, String(Date.now())); }catch(e){} refreshAllModuleCounts(); }
 function backupNote(){
   const t = +load(KEYS.backup, 0);
@@ -1018,11 +1116,11 @@ function exportText(){
 function parseJSONLoose(text){
   const raw = String(text);
   try{ return JSON.parse(raw); }catch(e){}
-  let s = raw.replace(/^\uFEFF/, '').trim().replace(/^```[\w-]*\s*/, '').replace(/\s*```\s*$/, '');
+  let s = raw.replace(/^﻿/, '').trim().replace(/^```[\w-]*\s*/, '').replace(/\s*```\s*$/, '');
   const a = s.search(/[\{\[]/), b = Math.max(s.lastIndexOf('}'), s.lastIndexOf(']'));
   if(a >= 0 && b > a) s = s.slice(a, b + 1);
   try{ return JSON.parse(s); }catch(e){}
-  s = s.replace(/[\u201C\u201D\u201E\u201F\u2033\uFF02]/g, '"').replace(/[\u2018\u2019\u201A\u201B]/g, "'");
+  s = s.replace(/[“”„‟″＂]/g, '"').replace(/[‘’‚‛]/g, "'");
   try{ return JSON.parse(s); }catch(e){}
   const s2 = s.replace(/｛/g, '{').replace(/｝/g, '}').replace(/［/g, '[').replace(/］/g, ']').replace(/：/g, ':').replace(/，/g, ',');
   try{ return JSON.parse(s2); }
@@ -1039,12 +1137,10 @@ function importFromText(text){
   }
   const when = obj.exportedAt ? new Date(obj.exportedAt).toLocaleString('ja-JP') : '日時不明';
   if(!confirm(`${when} に書き出したデータで、この端末の進捗をすべて上書きします。\n（自作の項目・苦手・復習プールも置き換わります）\nよろしいですか？`)) return;
-  statusMap = isObj(obj.statusMap) ? obj.statusMap : {};
-  wrongPool = Array.isArray(obj.wrongPool) ? obj.wrongPool : [];
-  customStore = isObj(obj.customStore) ? obj.customStore : {};
-  streakMap = isObj(obj.streakMap) ? obj.streakMap : {};
-  MODULE_KEYS.forEach(k => { ui[k].quiz = null; ui[k].result = null; if(ui[k].view !== 'items') ui[k].view = 'dash'; });
-  save(); closeModal(); renderAll(); toast('進捗を読み込みました');
+  const r = migrate(obj);
+  statusMap = r.statusMap; wrongPool = r.wrongPool; customStore = r.customStore; streakMap = r.streakMap;
+  [ALL].concat(MODULE_KEYS).forEach(k => { ui[k].quiz = null; ui[k].result = null; if(ui[k].view !== 'items') ui[k].view = 'dash'; });
+  save(); closeModal(); renderAll(); toast(r.migrated ? '旧版の進捗を章ごとの構成に変換して読み込みました' : '進捗を読み込みました');
 }
 function openPasteImport(){
   openModal(`<h3>テキストを貼り付けて読み込む</h3>
@@ -1067,8 +1163,11 @@ function openWeakImport(){
 function weakImportGo(){
   const text = $('#wk-area').value; let n = 0, miss = 0;
   text.split(/\r?\n/).forEach(line => {
-    const r = line.trim().match(/^([a-z]+):(\S+)/); if(!r) return;
-    if(MODULES[r[1]] && findFact(r[1], r[2])){ statusMap[sk(r[1], r[2])] = 'weak'; streakMap[sk(r[1], r[2])] = 0; n++; } else miss++;
+    const r = line.trim().match(/^([a-z0-9]+):(\S+)/); if(!r) return;
+    let k = r[1] + ':' + r[2];
+    if(LEGACY_MAP[k]) k = LEGACY_MAP[k];
+    const [m, id] = k.split(':');
+    if(MODULES[m] && findFact(m, id)){ statusMap[k] = 'weak'; streakMap[k] = 0; n++; } else miss++;
   });
   if(!n && !miss){ alert('読み込める行がありませんでした。'); return; }
   save(); closeModal(); renderAll();
@@ -1079,7 +1178,7 @@ function resetAll(){
   if(!confirm('本当に消しますか？（元に戻せません。先に「進捗をファイルに保存」しておくと安心です）')) return;
   [KEYS.status, KEYS.wrong, KEYS.custom, KEYS.streak, KEYS.backup].forEach(k => { try{ localStorage.removeItem(k); }catch(e){} });
   loadAll();
-  MODULE_KEYS.forEach(k => ui[k] = {view:'dash', quiz:null, result:null, filter:'all', search:''});
+  [ALL].concat(MODULE_KEYS).forEach(k => ui[k] = freshUI());
   closeModal(); renderAll(); toTop(); toast('リセットしました');
 }
 function menuHTML(){
@@ -1093,6 +1192,7 @@ function menuHTML(){
       <button class="menu-btn" data-act="weak-exp">苦手項目を書き出す</button>
       <button class="menu-btn" data-act="weak-imp">苦手項目をインポート</button></div>
     <div class="menu-sec"><div class="menu-h">問題を増やす</div>
+      <button class="menu-btn" data-act="add-fact">＋ 項目を1件追加</button>
       <button class="menu-btn" data-act="bulk">📋 まとめて追加（メモ・問題パック）</button></div>
     <div class="menu-sec"><button class="menu-btn danger" data-act="reset">全データをリセット</button></div>`;
 }
@@ -1113,19 +1213,20 @@ document.addEventListener('click', e => {
   const ov = $('#overlay');
   if(e.target === ov){ if(ov.dataset.dismiss === '1') closeModal(); return; }
   const el = e.target.closest('[data-act]'); if(!el || el.disabled) return;
-  const d = el.dataset, m = curMod;
+  const d = el.dataset, s = curScope;
   switch(d.act){
-    case 'mod': switchMod(d.m); break;
+    case 'scope': if(!$('#overlay').classList.contains('hidden')) closeModal(); switchScope(d.s); break;
+    case 'picker': openPicker(); break;
     case 'menu': openMenu(); break;
-    case 'tab': ui[m].view = d.v; renderPanel(m); toTop(); break;
-    case 'start': startQuiz(m, d.mode); break;
-    case 'ans': answer(m, d.v); break;
-    case 'next': nextQ(m); break;
-    case 'quit': quitQuiz(m); break;
-    case 'setst': setSt(m, d.id, d.s); save(); refreshAllModuleCounts(); renderItemList(m); break;
-    case 'filter': ui[m].filter = d.f; renderItemList(m); break;
-    case 'edit': openEditor(m, d.id); break;
-    case 'add-fact': openEditor(m, null); break;
+    case 'tab': ui[s].view = d.v; renderPanel(s); toTop(); break;
+    case 'start': startQuiz(s, d.mode); break;
+    case 'ans': answer(s, d.v); break;
+    case 'next': nextQ(s); break;
+    case 'quit': quitQuiz(s); break;
+    case 'setst': setSt(d.m, d.id, d.st); save(); refreshAllModuleCounts(); renderPanel(s); break;
+    case 'filter': ui[s].filter = d.f; renderItemList(s); break;
+    case 'edit': openEditor(d.m, d.id); break;
+    case 'add-fact': openEditor(null, null); break;
     case 'bulk': openBulk(); break;
     case 'close': closeModal(); break;
     case 'ed-addq': $('#ed-qs').insertAdjacentHTML('beforeend', qRow({statement:'', isTrue:false, explanation:''})); break;
@@ -1168,17 +1269,17 @@ document.addEventListener('input', e => {
 document.addEventListener('keydown', e => {
   if(!$('#overlay').classList.contains('hidden')) return;
   if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
-  const u = ui[curMod]; if(u.view !== 'quiz' || !u.quiz) return;
+  const u = ui[curScope]; if(u.view !== 'quiz' || !u.quiz) return;
   const k = e.key.toLowerCase();
   if(!u.quiz.answered){
-    if(k === 'o' || k === '1') answer(curMod, 'o');
-    else if(k === 'x' || k === '2') answer(curMod, 'x');
-    else if(k === 's' || k === '3') answer(curMod, 's');
-  }else if(k === 'enter' || k === ' '){ e.preventDefault(); nextQ(curMod); }
+    if(k === 'o' || k === '1') answer(curScope, 'o');
+    else if(k === 'x' || k === '2') answer(curScope, 'x');
+    else if(k === 's' || k === '3') answer(curScope, 's');
+  }else if(k === 'enter' || k === ' '){ e.preventDefault(); nextQ(curScope); }
 });
 
 /* ===== 起動 ===== */
-$('#main').innerHTML = MODULE_KEYS.map(m => `<section class="panel" id="panel-${m}"></section>`).join('');
+$('#main').innerHTML = '<section class="panel" id="panel"></section>';
 updateModeBtn();
 renderAll();
 
