@@ -201,6 +201,17 @@ textarea.inp{resize:vertical}
 .mode-mobile .toast{bottom:calc(86px + env(safe-area-inset-bottom))}
 @media (hover:hover){.btn:hover:not(:disabled),.menu-btn:hover{border-color:var(--gold)}}
 
+.star-btn{flex:none;border:1.5px solid #c8a200;background:var(--card);color:#a88600;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:700;line-height:1.3;white-space:nowrap}
+.star-btn.on{background:#ffd84a;border-color:#b8920a;color:#5a4600}
+.item-actions .star-btn{padding:5px 11px}
+.q-star{margin-left:auto;font-size:15px;padding:3px 11px}
+.fb-star{margin-top:12px;text-align:center}
+.fb-star .star-btn{padding:6px 16px}
+.star-start{text-align:left;border-color:#c8a200;background:#fffbe6;color:#6e5300}
+.star-start small{color:#8a7430}
+.chip[data-f=star]{color:#a88600}
+.chip[data-f=star].active{background:#ffd84a;color:#5a4600;border-color:#b8920a}
+
 </style>
 </head>
 <body>
@@ -447,14 +458,14 @@ const LEGACY_MAP = {"hourei:CH1-0":"ch1:CH1-0","hourei:CH1-1":"ch1:CH1-1","houre
 'use strict';
 /* ===== 設定（資格ごとに変える） ===== */
 const PFX = 'gaimuin_';
-const KEYS = {status:PFX+'status_map', wrong:PFX+'wrong_pool', custom:PFX+'custom_store', streak:PFX+'streak_map', mode:PFX+'display_mode', backup:PFX+'last_backup'};
+const KEYS = {status:PFX+'status_map', wrong:PFX+'wrong_pool', custom:PFX+'custom_store', streak:PFX+'streak_map', star:PFX+'star_map', mode:PFX+'display_mode', backup:PFX+'last_backup'};
 const SYNC_TYPE = 'gaimuin_quiz_full_sync';
 const PACK_TYPE = 'gaimuin_question_pack';
 const SYNC_VERSION = 2;
 const MAX_Q = 20;
 const BIG_TEXT = 50000;
 const STATUS_LABEL = {weak:'苦手', known:'分かった', unseen:'未学習'};
-const MODE_LABEL = {all:'全項目', weak:'苦手', unseen:'未学習', review:'復習'};
+const MODE_LABEL = {all:'全項目', weak:'苦手', unseen:'未学習', review:'復習', star:'★直前チェック'};
 const ALL = 'all';
 
 /* ===== 小道具 ===== */
@@ -497,13 +508,14 @@ function modFromCh(v, fb){
 
 /* ===== 保存 ===== */
 function load(k, def){ try{ const v = localStorage.getItem(k); if(v == null) return def; const p = JSON.parse(v); return p == null ? def : p; }catch(e){ return def; } }
-let statusMap, wrongPool, customStore, streakMap;
+let statusMap, wrongPool, customStore, streakMap, starMap;
 function save(){
   try{
     localStorage.setItem(KEYS.status, JSON.stringify(statusMap));
     localStorage.setItem(KEYS.wrong, JSON.stringify(wrongPool));
     localStorage.setItem(KEYS.custom, JSON.stringify(customStore));
     localStorage.setItem(KEYS.streak, JSON.stringify(streakMap));
+    localStorage.setItem(KEYS.star, JSON.stringify(starMap));
   }catch(e){ alert('保存できませんでした。ブラウザの保存容量が不足している可能性があります。'); }
 }
 
@@ -550,6 +562,7 @@ function migrate(d){
 function loadAll(){
   const r = migrate({statusMap:load(KEYS.status, {}), wrongPool:load(KEYS.wrong, []), customStore:load(KEYS.custom, {}), streakMap:load(KEYS.streak, {})});
   statusMap = r.statusMap; wrongPool = r.wrongPool; customStore = r.customStore; streakMap = r.streakMap;
+  starMap = load(KEYS.star, {}); if(!isObj(starMap)) starMap = {};
   if(r.migrated){ save(); setTimeout(() => toast('これまでの進捗を章ごとの構成に引き継ぎました'), 600); }
 }
 loadAll();
@@ -581,6 +594,10 @@ function questionsFor(f){
 }
 const sk = (m, id) => m + ':' + id;
 function st(m, id){ return statusMap[sk(m, id)] || 'unseen'; }
+const isStar = (m, id) => !!starMap[sk(m, id)];
+function toggleStar(m, id){ const k = sk(m, id); if(starMap[k]) delete starMap[k]; else starMap[k] = true; save(); return !!starMap[k]; }
+const starFacts = s => scopeFacts(s).filter(f => isStar(f.m, f.id));
+const starBtn = (m, id, cls, long) => { const on = isStar(m, id); return `<button class="star-btn${on ? ' on' : ''}${cls ? ' ' + cls : ''}" data-act="star" data-m="${m}" data-id="${esc(id)}" data-long="${long ? 1 : ''}" aria-label="直前チェック">${long ? (on ? '★ 直前チェック済み' : '☆ 直前チェックに追加') : (on ? '★' : '☆')}</button>`; };
 function setSt(m, id, s){
   const k = sk(m, id);
   if(s === 'unseen') delete statusMap[k]; else statusMap[k] = s;
@@ -702,6 +719,7 @@ function dashHTML(s, c){
       ${btn('unseen', '未学習から', c.unseen, qn(c.unseen))}
       ${btn('review', '復習（間違えた問題）', pool, Math.min(MAX_Q, pool))}
     </div>
+    ${(() => { const n = starFacts(s).length; return `<button class="btn start-btn star-start block mt" data-act="start" data-mode="star"${n ? '' : ' disabled'}>★ 直前チェック<small>${n ? `星を付けた ${n}項目を1問ずつ・全部出題` : '項目や問題の☆を押すと、ここで出題されます'}</small></button>`; })()}
     ${s === ALL ? `<div class="sec-h">章ごとの定着度</div><div class="card ch-card">${chapterTable(s)}</div>` : navArrows(s)}`;
 }
 function navArrows(s){
@@ -721,11 +739,11 @@ function itemsShellHTML(s){
 function renderItemList(s){
   const box = $('#item-list'); if(!box) return;
   const u = ui[s], facts = scopeFacts(s);
-  const cnt = {all:facts.length, weak:0, known:0, unseen:0};
-  facts.forEach(f => cnt[st(f.m, f.id)]++);
+  const cnt = {all:facts.length, weak:0, known:0, unseen:0, star:0};
+  facts.forEach(f => { cnt[st(f.m, f.id)]++; if(isStar(f.m, f.id)) cnt.star++; });
   const q = norm(u.search);
-  const shown = facts.filter(f => (u.filter === 'all' || st(f.m, f.id) === u.filter) && (!q || norm(f.text).includes(q)));
-  const chips = [['all','すべて'],['weak','苦手'],['known','分かった'],['unseen','未学習']]
+  const shown = facts.filter(f => (u.filter === 'all' || (u.filter === 'star' ? isStar(f.m, f.id) : st(f.m, f.id) === u.filter)) && (!q || norm(f.text).includes(q)));
+  const chips = [['all','すべて'],['star','★'],['weak','苦手'],['known','分かった'],['unseen','未学習']]
     .map(([f, l]) => `<button class="chip${u.filter === f ? ' active' : ''}" data-act="filter" data-f="${f}">${l} ${cnt[f]}</button>`).join('');
   let html = `<div class="chips">${chips}</div>`;
   if(!shown.length) html += `<p class="muted">該当する項目はありません。</p>`;
@@ -739,7 +757,7 @@ function renderItemList(s){
         <div class="item-top">${f.custom ? '<span class="tag c">自作</span>' : `<span>${esc(f.id)}</span>`}${f.edited ? '<span class="tag c">編集済</span>' : ''}<span class="tag">問題 ${qs.length}</span>${noX ? '<span class="tag warn">×問題なし</span>' : ''}</div>
         <div class="item-text">${esc(f.text)}</div>
         <div class="item-actions"><div class="seg">${['weak','known','unseen'].map(x => `<button class="${x}${stt === x ? ' on' : ''}" data-act="setst" data-m="${m}" data-id="${esc(f.id)}" data-st="${x}">${STATUS_LABEL[x]}</button>`).join('')}</div>
-        <button class="edit-btn" data-act="edit" data-m="${m}" data-id="${esc(f.id)}">編集</button></div></div>`;
+        ${starBtn(m, f.id)}<button class="edit-btn" data-act="edit" data-m="${m}" data-id="${esc(f.id)}">編集</button></div></div>`;
     });
   });
   box.innerHTML = html;
@@ -751,6 +769,11 @@ function generateQuiz(s, mode){
   if(mode === 'review'){
     return shuffle(wrongPool.filter(w => ms.includes(w.moduleKey))).slice(0, MAX_Q)
       .map(w => ({m:w.moduleKey, factId:w.factId, statement:w.statement, isTrue:!!w.isTrue, explanation:w.explanation || ''}));
+  }
+  if(mode === 'star'){
+    const out = [];
+    starFacts(s).forEach(f => { const c = questionsFor(f); if(!c.length) return; const q = c[Math.floor(Math.random() * c.length)]; out.push({m:f.m, factId:f.id, statement:q.statement, isTrue:!!q.isTrue, explanation:q.explanation || ''}); });
+    return out;
   }
   const facts = scopeFacts(s).filter(f => mode === 'all' || st(f.m, f.id) === mode);
   const qs = [];
@@ -773,7 +796,7 @@ function quizHTML(s){
   let h = `<div class="q-meta"><span>${s === ALL ? '全章' : esc(chName(s))}・${MODE_LABEL[q.mode]}モード</span><span>${q.idx + 1} / ${n} 問</span></div>
     <div class="bar"><i class="p" style="width:${pct(done, n)}%"></i></div>
     <div class="card q-card" style="--c:${M.color}">
-      <div class="q-ch"><span class="q-chno">${esc(chName(cur.m))}</span><span class="q-chtitle">${esc(M.title)}</span></div>
+      <div class="q-ch"><span class="q-chno">${esc(chName(cur.m))}</span><span class="q-chtitle">${esc(M.title)}</span>${starBtn(cur.m, cur.factId, 'q-star')}</div>
       <div class="q-st">${esc(cur.statement)}</div></div>`;
   if(!q.answered){
     h += `<div class="ans-grid"><button class="ans o" data-act="ans" data-v="o" aria-label="正しい">○</button><button class="ans x" data-act="ans" data-v="x" aria-label="誤り">×</button><button class="ans skip" data-act="ans" data-v="s">分からない</button></div>`;
@@ -784,7 +807,8 @@ function quizHTML(s){
     h += `<div class="fb ${cls}"><div class="fb-h">${head}</div>
       <div class="fb-ans">正しい答え：<b>${cur.isTrue ? '○（正しい）' : '×（誤り）'}</b></div>
       ${cur.explanation ? `<div class="fb-ex">${esc(cur.explanation)}</div>` : ''}
-      ${f && f.text !== cur.statement ? `<div class="fb-fact"><b>覚える内容（${esc(chFull(cur.m))}）</b>${esc(f.text)}</div>` : ''}</div>
+      ${f && f.text !== cur.statement ? `<div class="fb-fact"><b>覚える内容（${esc(chFull(cur.m))}）</b>${esc(f.text)}</div>` : ''}
+      <div class="fb-star">${starBtn(cur.m, cur.factId, '', true)}</div></div>
       <button class="btn primary block next" data-act="next">${q.idx >= n - 1 ? '結果を見る' : '次の問題へ'}</button>`;
   }
   return h + `<button class="quit" data-act="quit">ここで終了する</button>`;
@@ -929,6 +953,7 @@ function moveCustomFact(from, to, id){
   const ok = sk(from, id), nk = sk(to, id);
   if(ok in statusMap){ statusMap[nk] = statusMap[ok]; delete statusMap[ok]; }
   if(ok in streakMap){ streakMap[nk] = streakMap[ok]; delete streakMap[ok]; }
+  if(ok in starMap){ starMap[nk] = starMap[ok]; delete starMap[ok]; }
   wrongPool.forEach(w => { if(w.moduleKey === from && w.factId === id){ w.moduleKey = to; w.ch = MODULES[to].ch; } });
   a.addedQuestions = a.addedQuestions.filter(q => q.factId !== id);
 }
@@ -967,7 +992,7 @@ function deleteFact(){
   if(!confirm('この項目と、ひもづく問題を削除します。よろしいですか？')) return;
   c.addedFacts = c.addedFacts.filter(f => f.id !== id);
   c.addedQuestions = c.addedQuestions.filter(q => q.factId !== id);
-  delete statusMap[sk(m, id)]; delete streakMap[sk(m, id)];
+  delete statusMap[sk(m, id)]; delete streakMap[sk(m, id)]; delete starMap[sk(m, id)];
   wrongPool = wrongPool.filter(w => !(w.moduleKey === m && w.factId === id));
   save(); closeModal(); renderAll(); toast('削除しました');
 }
@@ -1089,7 +1114,7 @@ function bulkCommit(){
 }
 
 /* ===== 同期 ===== */
-function buildSync(){ return {__type:SYNC_TYPE, version:SYNC_VERSION, exportedAt:new Date().toISOString(), statusMap, wrongPool, customStore, streakMap}; }
+function buildSync(){ return {__type:SYNC_TYPE, version:SYNC_VERSION, exportedAt:new Date().toISOString(), statusMap, wrongPool, customStore, streakMap, starMap}; }
 function markBackup(){ try{ localStorage.setItem(KEYS.backup, String(Date.now())); }catch(e){} refreshAllModuleCounts(); }
 function backupNote(){
   const t = +load(KEYS.backup, 0);
@@ -1139,6 +1164,7 @@ function importFromText(text){
   if(!confirm(`${when} に書き出したデータで、この端末の進捗をすべて上書きします。\n（自作の項目・苦手・復習プールも置き換わります）\nよろしいですか？`)) return;
   const r = migrate(obj);
   statusMap = r.statusMap; wrongPool = r.wrongPool; customStore = r.customStore; streakMap = r.streakMap;
+  starMap = isObj(obj.starMap) ? obj.starMap : {};
   [ALL].concat(MODULE_KEYS).forEach(k => { ui[k].quiz = null; ui[k].result = null; if(ui[k].view !== 'items') ui[k].view = 'dash'; });
   save(); closeModal(); renderAll(); toast(r.migrated ? '旧版の進捗を章ごとの構成に変換して読み込みました' : '進捗を読み込みました');
 }
@@ -1153,6 +1179,12 @@ function weakExport(){
   MODULE_KEYS.forEach(m => getFacts(m).forEach(f => { if(st(m, f.id) === 'weak') lines.push(`${m}:${f.id}\t${f.text.replace(/\s+/g, ' ')}`); }));
   if(!lines.length){ alert('苦手の項目はありません。'); return; }
   showTextModal(lines.join('\n'), `苦手項目（${lines.length}件）`, '別の端末の「苦手項目をインポート」に貼り付けると、同じ項目が苦手になります（苦手以外の情報は同期されません）。');
+}
+function starExport(){
+  const lines = [];
+  MODULE_KEYS.forEach(m => { const fs = getFacts(m).filter(f => isStar(m, f.id)); if(!fs.length) return; lines.push(`【${chFull(m)}】`); fs.forEach(f => lines.push('★ ' + f.text.replace(/\s+/g, ' '))); lines.push(''); });
+  if(!lines.length){ alert('星を付けた項目はありません。'); return; }
+  showTextModal(lines.join('\n').trim(), `直前チェック項目（${Object.keys(starMap).length}件）`, '試験直前の見直し用に、メモアプリなどに貼り付けて使えます。');
 }
 function openWeakImport(){
   openModal(`<h3>苦手項目をインポート</h3>
@@ -1176,7 +1208,7 @@ function weakImportGo(){
 function resetAll(){
   if(!confirm('この端末の進捗・自作項目・復習プールをすべて消します。よろしいですか？')) return;
   if(!confirm('本当に消しますか？（元に戻せません。先に「進捗をファイルに保存」しておくと安心です）')) return;
-  [KEYS.status, KEYS.wrong, KEYS.custom, KEYS.streak, KEYS.backup].forEach(k => { try{ localStorage.removeItem(k); }catch(e){} });
+  [KEYS.status, KEYS.wrong, KEYS.custom, KEYS.streak, KEYS.star, KEYS.backup].forEach(k => { try{ localStorage.removeItem(k); }catch(e){} });
   loadAll();
   [ALL].concat(MODULE_KEYS).forEach(k => ui[k] = freshUI());
   closeModal(); renderAll(); toTop(); toast('リセットしました');
@@ -1191,6 +1223,8 @@ function menuHTML(){
     <div class="menu-sec"><div class="menu-h">苦手項目だけ受け渡す</div>
       <button class="menu-btn" data-act="weak-exp">苦手項目を書き出す</button>
       <button class="menu-btn" data-act="weak-imp">苦手項目をインポート</button></div>
+    <div class="menu-sec"><div class="menu-h">★ 直前チェック</div>
+      <button class="menu-btn" data-act="star-exp">★ 直前チェック項目を書き出す</button></div>
     <div class="menu-sec"><div class="menu-h">問題を増やす</div>
       <button class="menu-btn" data-act="add-fact">＋ 項目を1件追加</button>
       <button class="menu-btn" data-act="bulk">📋 まとめて追加（メモ・問題パック）</button></div>
@@ -1223,6 +1257,8 @@ document.addEventListener('click', e => {
     case 'ans': answer(s, d.v); break;
     case 'next': nextQ(s); break;
     case 'quit': quitQuiz(s); break;
+    case 'star': { const on = toggleStar(d.m, d.id); if(d.long) el.textContent = on ? '★ 直前チェック済み' : '☆ 直前チェックに追加'; else el.textContent = on ? '★' : '☆'; el.classList.toggle('on', on); document.querySelectorAll(`.star-btn[data-m="${d.m}"][data-id="${CSS.escape(d.id)}"]`).forEach(b => { if(b === el) return; b.classList.toggle('on', on); b.textContent = b.dataset.long ? (on ? '★ 直前チェック済み' : '☆ 直前チェックに追加') : (on ? '★' : '☆'); }); toast(on ? '直前チェックに追加しました' : '直前チェックから外しました'); break; }
+    case 'star-exp': starExport(); break;
     case 'setst': setSt(d.m, d.id, d.st); save(); refreshAllModuleCounts(); renderPanel(s); break;
     case 'filter': ui[s].filter = d.f; renderItemList(s); break;
     case 'edit': openEditor(d.m, d.id); break;
